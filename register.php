@@ -1,51 +1,7 @@
 <?php
 
-require 'conn.php';
-$error = 0;
-
-function registrasi($data)
-{
-	global $conn;
-	global $error;
-	$nama_user = $_POST["nama_user"];
-	$asal_sekolah = $_POST["asal_sekolah"];
-	$jk = $_POST["jk"];
-	$email = $_POST["email"];
-	$telepon = $_POST["telepon"];
-	$password = $_POST["password"];
-	$kartu_pelajar = $_POST["kartu_pelajar"];
-	$validated = 0;
-
-	$result = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
-	if( mysqli_fetch_assoc($result) )
-	{
-		$error = 2;
-		return false;
-	}
-
-	//enkripsi
-	// $password = password_hash($password, PASSWORD_DEFAULT);
-
-	//add to db
-	$sql = mysqli_query($conn, "INSERT INTO user VALUES('', '$nama_user', '$asal_sekolah', '$jk', '$email', '$telepon', '$password', '$kartu_pelajar', '$validated')");
-	return mysqli_affected_rows($conn);
-}
-
-if( isset($_POST["register"]) ) 
-{
-
-	if( registrasi($_POST) > 0 ) 
-	{
-		$error = 1;
-		echo "<script>
-				alert('user baru berhasil ditambahkan');
-			</script>";
-	}
-	else
-	{
-		echo mysqli_error($conn);
-	}
-}
+	require 'conn.php';
+	session_start();
 
 ?>
 
@@ -79,7 +35,13 @@ if( isset($_POST["register"]) )
 				<?php if ($error == 2) { ?>
 					<nav aria-label="breadcrumb" style="background-color: #ba8888; border-radius: 5px !important;" class="mb-4 p-2">
 						<ol class="breadcrumb flex">
-							<li class="breadcrumb-item active" aria-current="page" style="color: white">Data salah, silahkan login kembali</li>
+							<li class="breadcrumb-item active" aria-current="page" style="color: white">Email telah terdaftar, silahkan daftar kembali</li>
+						</ol>
+					</nav>
+				<?php } elseif ($error == 3) { ?>
+					<nav aria-label="breadcrumb" style="background-color: #ba8888; border-radius: 5px !important;" class="mb-4 p-2">
+						<ol class="breadcrumb flex">
+							<li class="breadcrumb-item active" aria-current="page" style="color: #262626;">Data yang dimasukan tidak sesuai</a></li>
 						</ol>
 					</nav>
 				<?php } elseif ($error == 1) { ?>
@@ -90,7 +52,7 @@ if( isset($_POST["register"]) )
 					</nav>
 				<?php } ?>
 				
-				<form method="post">
+				<form method="post" action="admin/uploads.php" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label for="nama" class="form-label">Nama</label>
 						<input type="text" name="nama_user" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap">
@@ -103,13 +65,13 @@ if( isset($_POST["register"]) )
 
 					<label for="jk" class="mb-2">Jenis Kelamin</label>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" value="P" name="jk" id="jk1">
+						<input class="form-check-input" type="radio" value="Perempuan" name="jk" id="jk1">
 						<label class="form-check-label" for="jk1">
 							Perempuan
 						</label>
 					</div>
 					<div class="form-check mb-3">
-						<input class="form-check-input" type="radio" value="L" name="jk" id="jk2">
+						<input class="form-check-input" type="radio" value="Laki-Laki" name="jk" id="jk2">
 						<label class="form-check-label" for="jk2">
 							Laki-Laki
 						</label>
@@ -133,11 +95,11 @@ if( isset($_POST["register"]) )
 
 					<label for="kartupelajar" class="mb-2">Kartu Pelajar</label>
 					<div class="input-group">
-						<input type="file" name="kartu_pelajar" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+						<input input type="file" name="file1" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 					</div>
 
 					<div class="d-grid mb-1 mt-5">
-						<button type="submit" name="register" class="btn btn-block text-light" style="background-color: #901311">Daftar</button>
+						<button type="submit" name="submit" class="btn btn-block text-light" style="background-color: #901311">Daftar</button>
 					</div>
 				</form>
 

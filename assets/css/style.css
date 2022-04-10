@@ -21,6 +21,12 @@ body{
   line-height: 30px;
 }
 
+a.link-preview {
+  display: inline-block;
+  border: 1px dotted black;
+  padding: 5px;
+}
+
 .title-2 {
   color: white; 
   font-size: 23px; 

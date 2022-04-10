@@ -1,5 +1,5 @@
 <?php
-	include 'conn.php';
+	include '../conn.php';
 	$record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
 ?>
 
@@ -22,7 +22,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
 			<a class="navbar-brand" href="#">
-                <img src="assets/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
+                <img src="../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
             </a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -36,42 +36,10 @@
 						<a class="nav-link" href="uploadMateri.php">Materi&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="Dashboard.php"><b>Dashboard Nilai</b>&emsp;</a>
+						<a class="nav-link" href="dashboard.php"><b>Dashboard Nilai</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<div class="dropdown">
-							<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-							<span class="iconify" style="font-size: 25px; color: black" data-icon="healthicons:ui-user-profile-outline"></span>
-							</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								<a class="dropdown-item" href="profil.php">
-								<?php
-									if(!isset($_SESSION["login"])) {
-										echo "Profil";
-									} else {
-										echo $_COOKIE['username'];
-									}
-								?>
-								</a>
-								<?php
-								if(isset($_SESSION["login"])) {
-									echo 
-									"
-									<a class='dropdown-item' href='logout.php'>
-										Keluar
-									</a>
-									";
-								} else {
-									echo 
-									"
-									<a class='dropdown-item' href='login.php'>
-										Masuk
-									</a>
-									";
-								}
-								?>
-							</div>
-						</div>
+						<a class="nav-link" href="../logout.php">Logout&emsp;</a>
 					</li>
 				</ul>
 			</div>
@@ -79,39 +47,33 @@
 	</nav>
 
 	<div class="container mt-5 mb-5">
-		<canvas id="myChart" style="width:100%;"></canvas>
+		<canvas class="mt-4" id="chartUAS" style="width:100%;"></canvas>
 	</div>
 
-	<!-- chart -->
 	<script>
-		var xValues = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+        var xValues = ["SEM-1","SEM-2","SEM-3","SEM-4","SEM-5","SEM-6"];
+        var yValues = [83,89,82,68,84,85,69];
 
-		new Chart("myChart", {
-		type: "bar",
-		data: {
-			labels: xValues,
-			datasets: [{ 
-			data: [70,34,64,97,80,69,96,100,47,93,13,46],
-			backgroundColor: "#965954",
-			fill: false
-			// label: "UAS",
-			}, { 
-			data: [36,83,65,85,35,68,87,95,35,76,24,57],
-			backgroundColor: "#94403a",
-			fill: false
-			// label: "UTS",
-			}, { 
-			data: [60,35,58,77,97,68,94,26,89,56,86,34],
-			backgroundColor: "#8c2d24",
-			fill: false
-			// label: "PHB",
-			}]
-		},
-		options: {
-			legend: {display: false}
-		}
-	});
-	</script>
+        new Chart("chartUAS", {
+        type: "line",
+        data: {
+            labels: xValues,
+            datasets: [{
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(0,0,255,1.0)",
+            borderColor: "rgba(0,0,255,0.1)",
+            data: yValues
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+            yAxes: [{ticks: {min: 0, max:100}}],
+            }
+        }
+        });
+    </script>
 	<!-- iconify -->
 	<script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
 	<!-- Option 1: Bootstrap Bundle with Popper -->

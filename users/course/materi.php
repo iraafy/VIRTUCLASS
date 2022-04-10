@@ -88,9 +88,7 @@
 		</div>
 	</nav>
 
-	<!-- Side-Nav -->
 	<div class="wrapper mt-5">
-        <!-- Sidebar Holder -->
         <div id="sidebar">
 			<div class="row">
 				<div class="mt-3">
@@ -106,7 +104,6 @@
 												<?php 
 												echo $keyModul['nama_modul']; 
 												$getID_Modul = $keyModul['id_modul'];
-												// echo $getID_Kelas;
 												?>
 											</b>
 										</button>

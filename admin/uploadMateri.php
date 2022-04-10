@@ -1,6 +1,10 @@
 <?php
 	include '../conn.php';
 	$record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
+	$kelas = mysqli_query($conn, 'SELECT * FROM kelas');
+	$kelas_course = mysqli_query($conn, 'select id_course, nama_course, nama_kelas from course a join kelas b on a.id_kelas = b.id_kelas;');
+	$data_modul = mysqli_query($conn, 'select id_modul, nama_modul, nama_course, nama_kelas from course a join modul b on a.id_course = b.id_course join kelas c on a.id_kelas = c.id_kelas;');	
+	$list_data = mysqli_query($conn, 'select judul_content, content, nama_modul, nama_course, nama_kelas from submodul a join modul b on a.id_modul = b.id_modul join course c on b.id_course = c.id_course join kelas d on c.id_kelas = d.id_kelas;');
 ?>
 
 
@@ -46,31 +50,159 @@
 		</div>
 	</nav>
 
-    <div class="container mt-5">
-        <h3 class="mb-4" style="text-align: center">
-            <b>
-                Upload Modul
-            </b>
-        </h3>
-        <form>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Nama modul</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Isi content</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Nama modul</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Isi content</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <button type="submit" class="btn btn-danger" style="width:100%">Submit</button>
-        </form>
+    <div class="container mt-5 mb-5">
+		<h3 class="text-center mt-3 mb-5" style="color: #991311">
+			<b>
+				Manajemen Data VirtuClass
+			</b>
+		</h3>
+		<div class="card mb-5" style="box-shadow: 2px 2px 10px 1px rgba(0,0,0,0.30);">
+			<div class="card-body" style="width: 100%;">
+				<nav>
+					<div class="nav nav-tabs" id="nav-tab" role="tablist">
+						<button class="nav-link active" id="nav-course-tab" data-bs-toggle="tab" data-bs-target="#nav-course" type="button" role="tab" aria-controls="nav-course" aria-selected="false">Upload Course</button>
+						<button class="nav-link" id="nav-modul-tab" data-bs-toggle="tab" data-bs-target="#nav-modul" type="button" role="tab" aria-controls="nav-modul" aria-selected="false">Upload Modul</button>
+						<button class="nav-link" id="nav-submodul-tab" data-bs-toggle="tab" data-bs-target="#nav-submodul" type="button" role="tab" aria-controls="nav-submodul" aria-selected="false">Upload Sub-Modul</button>
+						<button class="nav-link" id="nav-kelas-tab" data-bs-toggle="tab" data-bs-target="#nav-kelas" type="button" role="tab" aria-controls="nav-kelas" aria-selected="true">Upload Kelas</button>
+					</div>
+				</nav>
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-course" role="tabpanel" aria-labelledby="nav-course-tab">
+						<form action="" method="post">
+							<label class="mt-3 mb-2"><b>Nama Course</b></label>
+							<div class="input-group">
+								<input type="text" class="form-control" name="nama_course" placeholder="Masukan Nama Course">
+							</div>
+							<label class="mt-3 mb-2"><b>Url Background</b></label>
+							<div class="input-group">
+								<input type="text" name="bg_course" class="form-control" id="inputGroupFile02" placeholder="Masukan URL Foto">
+							</div>
+							<label class="mt-3 mb-2"><b>Deskripsi Course</b></label>
+							<div class="input-group">
+								<input type="text" class="form-control" name="desc_course" placeholder="Masukan Deskripsi Course">
+							</div>
+							<label class="mt-3 mb-2" for="inputGroupSelect01"><b>Kategori Kelas</b></label>
+							<div class="input-group">
+								<select class="form-select" id="kategori_kelas" name="kategori_kelas">
+									<option disabled selected> Pilih Kelas </option>									
+									<?php foreach ($kelas as $data) { ?>
+										<option value="<?=$data['id_kelas']?>"><?=$data['nama_kelas']?></option> 
+									<?php } ?>
+								</select>
+							</div>
+							<button type="upload_course" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
+						</form>
+					</div>
+					<div class="tab-pane fade" id="nav-modul" role="tabpanel" aria-labelledby="nav-modul-tab">
+						<form action="" method="post">
+							<label class="mt-3 mb-2"><b>Nama Modul</b></label>
+							<div class="input-group">
+								<input type="text" class="form-control" name="nama_modul" placeholder="Masukan Nama Modul">
+							</div>
+							<label class="mt-3 mb-2" for="inputGroupSelect01"><b>Kategori Pelajaran(Course)</b></label>
+							<div class="input-group">
+								<select class="form-select" id="kategori_course" name="kategori_course">
+									<option disabled selected> Pilih Course </option>									
+									<?php foreach ($kelas_course as $dataa) { ?>
+										<option value="<?=$dataa['id_course']?>"><?=$dataa['nama_course']?> - <?=$dataa['nama_kelas']?></option> 
+									<?php } ?>
+								</select>
+							</div>
+							<button type="upload_modul" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
+						</form>
+					</div>
+					<div class="tab-pane fade" id="nav-submodul" role="tabpanel" aria-labelledby="nav-submodul-tab">
+						<form action="" method="post">
+							<label class="mt-3 mb-2"><b>Judul Sub-Modul</b></label>
+							<div class="input-group">
+								<input type="text" class="form-control" name="nama_submodul" placeholder="Masukan Judul Sub-Modul">
+							</div>
+							<label class="mt-3 mb-2"><b>Isi Content</b></label>
+							<div class="form-floating">
+								<textarea class="form-control" name="content" id="content" style="height: 150px"></textarea>
+								<label for="floatingTextarea">Masukan Content</label>
+							</div>
+							<label class="mt-3 mb-2" for="inputGroupSelect01"><b>Kategori Modul</b></label>
+							<div class="input-group">
+								<select class="form-select" id="kategori_modul" name="kategori_modul">
+									<option disabled selected> Pilih Modul </option>									
+									<?php foreach ($data_modul as $dataaa) { ?>
+										<option value="<?=$dataaa['id_modul']?>"><?=$dataaa['nama_modul']?> - <?=$dataaa['nama_course']?> - <?=$dataaa['nama_kelas']?></option> 
+									<?php } ?>
+								</select>
+							</div>
+							<button type="upload_submodul" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
+						</form>
+					</div>
+					<div class="tab-pane fade" id="nav-kelas" role="tabpanel" aria-labelledby="nav-kelas-tab">
+						<label class="mt-3 mb-2"><b>Tambah Kelas</b></label>
+						<div class="input-group">
+							<input type="text" class="form-control" name="kelas" placeholder="Masukan Nama Kelas">
+						</div>
+						<button type="upload_kelas" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br><br>
+		<div class="row">
+			<table class="table">
+				<thead>
+					<tr style="font-weight: bold;">
+						<td>
+							NO
+						</td>
+						<td>
+							Course
+						</td>
+						<td>
+							Kelas
+						</td>
+						<td>
+							Modul
+						</td>
+						<td>
+							Sub-Modul
+						</td>
+						<td>
+							Content
+						</td>
+						<td>
+							Detail
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<?php $no = 1; ?>
+					<?php foreach ($list_data as $list) { ?>
+						<tr>
+							<td>
+								<?=$no;?>
+							</td>
+							<td>
+								<?=$list['nama_course']?>
+							</td>
+							<td>
+								<?=$list['nama_kelas']?>
+							</td>
+							<td>
+								<?=$list['nama_modul']?>
+							</td>
+							<td>
+								<?=$list['judul_content']?>
+							</td>
+							<td>
+								<?=$list['content']?>
+							</td>
+							<td>
+								<a href="detail.php?id_user=" class="btn btn-outline-success">Detail</a>
+							</td>
+						</tr>
+					<?php $no++ ?>
+					<?php } ?>
+				</tbody>
+			</table>
+		</div>
     </div>
 
 	</script>
