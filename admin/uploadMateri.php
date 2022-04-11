@@ -1,10 +1,70 @@
 <?php
+
 	include '../conn.php';
-	$record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
+	include '../assets/php/function.php';
+	$notif = 0;
+	$error = 0;
 	$kelas = mysqli_query($conn, 'SELECT * FROM kelas');
 	$kelas_course = mysqli_query($conn, 'select id_course, nama_course, nama_kelas from course a join kelas b on a.id_kelas = b.id_kelas;');
 	$data_modul = mysqli_query($conn, 'select id_modul, nama_modul, nama_course, nama_kelas from course a join modul b on a.id_course = b.id_course join kelas c on a.id_kelas = c.id_kelas;');	
 	$list_data = mysqli_query($conn, 'select judul_content, content, nama_modul, nama_course, nama_kelas from submodul a join modul b on a.id_modul = b.id_modul join course c on b.id_course = c.id_course join kelas d on c.id_kelas = d.id_kelas;');
+
+	if( isset($_POST["upload_course"]) ) 
+	{
+		if( upload_course($_POST) > 0 ) 
+		{
+			$notif = 1;
+			header("Refresh: 4; url=uploadMateri.php");
+		}
+		else
+		{
+			$error = 3;
+			header("Refresh: 4; url=uploadMateri.php");
+		}
+	}
+	else if( isset($_POST["upload_modul"]) ) 
+	{
+
+		if( upload_modul($_POST) > 0 ) 
+		{
+			$notif = 2;
+			header("Refresh: 4; url=uploadMateri.php");
+		}
+		else
+		{
+			$error = 3;
+			header("Refresh: 4; url=uploadMateri.php");
+		}
+	}
+	else if( isset($_POST["upload_submodul"]) ) 
+	{
+
+		if( upload_submodul($_POST) > 0 ) 
+		{
+			$notif = 3;
+			header("Refresh: 4; url=uploadMateri.php");
+		}
+		else
+		{
+			$error = 3;
+			header("Refresh: 4; url=uploadMateri.php");
+		}
+	}
+	else if( isset($_POST["upload_kelas"]) ) 
+	{
+
+		if( upload_kelas($_POST) > 0 ) 
+		{
+			$notif = 4;
+			header("Refresh: 4; url=uploadMateri.php");
+		}
+		else
+		{
+			$error = 3;
+			header("Refresh: 4; url=uploadMateri.php");
+		}
+	}
+
 ?>
 
 
@@ -56,6 +116,55 @@
 				Manajemen Data VirtuClass
 			</b>
 		</h3>
+		<?php if ($error == 1) { ?>
+			<nav aria-label="breadcrumb" style="background-color: #ba8888; border-radius: 5px !important;" class="mb-4 p-2">
+				<ol class="breadcrumb flex">
+					<li class="breadcrumb-item active" aria-current="page" style="color: white;">Data Course gagal ditambahkan</li>
+				</ol>
+			</nav>
+		<?php } elseif ($error == 2) { ?>
+			<nav aria-label="breadcrumb" style="background-color: #ba8888; border-radius: 5px !important;" class="mb-4 p-2">
+				<ol class="breadcrumb flex">
+					<li class="breadcrumb-item active" aria-current="page" style="color: white;">Data Course gagal ditambahkan</li>
+				</ol>
+			</nav>
+		<?php } elseif ($error == 3) { ?>
+			<nav aria-label="breadcrumb" style="background-color: #ba8888; border-radius: 5px !important;" class="mb-4 p-2">
+				<ol class="breadcrumb flex">
+					<li class="breadcrumb-item active" aria-current="page" style="color: white;">Data Course gagal ditambahkan</li>
+				</ol>
+			</nav>
+		<?php } elseif ($error == 4) { ?>
+			<nav aria-label="breadcrumb" style="background-color: #ba8888; border-radius: 5px !important;" class="mb-4 p-2">
+				<ol class="breadcrumb flex">
+					<li class="breadcrumb-item active" aria-current="page" style="color: white;">Data Course gagal ditambahkan</li>
+				</ol>
+			</nav>
+		<?php } elseif ($notif == 1) { ?>
+			<nav aria-label="breadcrumb" style="background-color: #97cc9b; border-radius: 5px !important;" class="mb-4 p-2">
+				<ol class="breadcrumb flex">
+					<li class="breadcrumb-item active" aria-current="page" style="color: white;">Data Course berhasil ditambahkan</li>
+				</ol>
+			</nav>
+		<?php } elseif ($notif == 2) { ?>
+			<nav aria-label="breadcrumb" style="background-color: #97cc9b; border-radius: 5px !important;" class="mb-4 p-2">
+				<ol class="breadcrumb flex">
+					<li class="breadcrumb-item active" aria-current="page" style="color: white;">Data Course berhasil ditambahkan</li>
+				</ol>
+			</nav>
+		<?php } elseif ($notif == 3) { ?>
+			<nav aria-label="breadcrumb" style="background-color: #97cc9b; border-radius: 5px !important;" class="mb-4 p-2">
+				<ol class="breadcrumb flex">
+					<li class="breadcrumb-item active" aria-current="page" style="color: white;">Data Course berhasil ditambahkan</li>
+				</ol>
+			</nav>
+		<?php } elseif ($notif == 4) { ?>
+			<nav aria-label="breadcrumb" style="background-color: #97cc9b; border-radius: 5px !important;" class="mb-4 p-2">
+				<ol class="breadcrumb flex">
+					<li class="breadcrumb-item active" aria-current="page" style="color: white;">Data Course berhasil ditambahkan</li>
+				</ol>
+			</nav>
+		<?php } ?>
 		<div class="card mb-5" style="box-shadow: 2px 2px 10px 1px rgba(0,0,0,0.30);">
 			<div class="card-body" style="width: 100%;">
 				<nav>
@@ -90,7 +199,7 @@
 									<?php } ?>
 								</select>
 							</div>
-							<button type="upload_course" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
+							<button type="submit" name="upload_course" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
 						</form>
 					</div>
 					<div class="tab-pane fade" id="nav-modul" role="tabpanel" aria-labelledby="nav-modul-tab">
@@ -108,14 +217,14 @@
 									<?php } ?>
 								</select>
 							</div>
-							<button type="upload_modul" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
+							<button type="submit" name="upload_modul" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
 						</form>
 					</div>
 					<div class="tab-pane fade" id="nav-submodul" role="tabpanel" aria-labelledby="nav-submodul-tab">
 						<form action="" method="post">
 							<label class="mt-3 mb-2"><b>Judul Sub-Modul</b></label>
 							<div class="input-group">
-								<input type="text" class="form-control" name="nama_submodul" placeholder="Masukan Judul Sub-Modul">
+								<input type="text" class="form-control" name="judul_content" placeholder="Masukan Judul Sub-Modul">
 							</div>
 							<label class="mt-3 mb-2"><b>Isi Content</b></label>
 							<div class="form-floating">
@@ -131,15 +240,17 @@
 									<?php } ?>
 								</select>
 							</div>
-							<button type="upload_submodul" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
+							<button type="submit" name="upload_submodul" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
 						</form>
 					</div>
 					<div class="tab-pane fade" id="nav-kelas" role="tabpanel" aria-labelledby="nav-kelas-tab">
-						<label class="mt-3 mb-2"><b>Tambah Kelas</b></label>
-						<div class="input-group">
-							<input type="text" class="form-control" name="kelas" placeholder="Masukan Nama Kelas">
-						</div>
-						<button type="upload_kelas" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
+						<form action="" method="post">
+							<label class="mt-3 mb-2"><b>Tambah Kelas</b></label>
+							<div class="input-group">
+								<input type="text" class="form-control" name="nama_kelas" placeholder="Masukan Nama Kelas">
+							</div>
+							<button type="submit" name="upload_kelas" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
+						</form>
 					</div>
 				</div>
 			</div>

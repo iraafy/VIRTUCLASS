@@ -59,7 +59,6 @@
                     <h1>
                         <b> Dashboard Admin </b>
                     </h1>
-                    <!-- <p class="lead">Ayo Kerja! :)</p> -->
                 </div>
             </div>
 		</div>
