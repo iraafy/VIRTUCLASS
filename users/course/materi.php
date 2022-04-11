@@ -1,5 +1,5 @@
 <?php
-	include 'conn.php';
+	include '../../conn.php';
 	session_start();
 	if( !isset($_SESSION["login"]))
 	{
@@ -20,7 +20,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="../../assets/css/style.css">
 	<title>Course VirtuClass</title>
 
 </head>
@@ -29,7 +29,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
 			<a class="navbar-brand" href="#">
-                <img src="assets/virtuclass_logo.svg" width="50px" alt="virtuclass-logo">
+                <img src="../../assets/img/virtuclass_logo.svg" width="50px" alt="virtuclass-logo">
             </a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -37,16 +37,16 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-						<a class="nav-link" href="index.php">Home&emsp;</a>
+						<a class="nav-link" href="../../index.php">Home&emsp;</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="kelas.php"><b>Course</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">About&emsp;</a>
+						<a class="nav-link" href="../../index.php#about">About&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">FAQ&emsp;</a>
+						<a class="nav-link" href="../../index.php#faq">FAQ&emsp;</a>
 					</li>
 					<li class="nav-item">
 						<div class="dropdown">
@@ -54,7 +54,7 @@
 							<span class="iconify" style="font-size: 25px; color: black" data-icon="healthicons:ui-user-profile-outline"></span>
 							</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								<a class="dropdown-item" href="profil.php">
+								<a class="dropdown-item" href="../profil.php">
 								<?php
 									if(!isset($_SESSION["login"])) {
 										echo "Profil";
@@ -67,14 +67,14 @@
 								if(isset($_SESSION["login"])) {
 									echo 
 									"
-									<a class='dropdown-item' href='logout.php'>
+									<a class='dropdown-item' href='../../logout.php'>
 										Keluar
 									</a>
 									";
 								} else {
 									echo 
 									"
-									<a class='dropdown-item' href='login.php'>
+									<a class='dropdown-item' href='../../login.php'>
 										Masuk
 									</a>
 									";
