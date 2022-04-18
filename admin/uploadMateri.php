@@ -76,6 +76,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<link rel="stylesheet" href="../assets/css/style.css">
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<title>TEST</title>
@@ -259,7 +260,7 @@
 		<div class="row">
 			<table class="table">
 				<thead>
-					<tr style="font-weight: bold;">
+					<tr style="font-weight: bold; text-align:center;">
 						<td>
 							NO
 						</td>
@@ -275,15 +276,15 @@
 						<td>
 							Sub-Modul
 						</td>
-						<td>
+						<td class="ellipsis">
 							Content
 						</td>
 						<td>
-							Detail
+							Opsi
 						</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody style="text-align:center">
 					<?php $no = 1; ?>
 					<?php foreach ($list_data as $list) { ?>
 						<tr>
@@ -302,11 +303,13 @@
 							<td>
 								<?=$list['judul_content']?>
 							</td>
-							<td>
+							<td class="ellipsis">
 								<?=$list['content']?>
 							</td>
 							<td>
-								<a href="detail.php?id_user=" class="btn btn-outline-success">Detail</a>
+								<a href="detail.php?id_user=" class="btn btn-outline-success"><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: green;"></span></a>
+								&nbsp;
+								<a href="detail.php?id_user=" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
 							</td>
 						</tr>
 					<?php $no++ ?>

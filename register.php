@@ -32,7 +32,7 @@
 			</div>
 
 			<div class="card-text">
-				<?php if ($error == 2) { ?>
+				<!-- <?php if ($error == 2) { ?>
 					<nav aria-label="breadcrumb" style="background-color: #ba8888; border-radius: 5px !important;" class="mb-4 p-2">
 						<ol class="breadcrumb flex">
 							<li class="breadcrumb-item active" aria-current="page" style="color: white">Email telah terdaftar, silahkan daftar kembali</li>
@@ -50,7 +50,7 @@
 							<li class="breadcrumb-item active" aria-current="page" style="color: #262626;">Pendaftaran berhasil, silahkan <a href="login.php">Masuk</a></li>
 						</ol>
 					</nav>
-				<?php } ?>
+				<?php } ?> -->
 				
 				<form method="post" action="admin/uploads.php" enctype="multipart/form-data">
 					<div class="mb-3">

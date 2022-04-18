@@ -21,6 +21,13 @@ body{
   line-height: 30px;
 }
 
+.ellipsis {
+  max-width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 a.link-preview {
   display: inline-block;
   border: 1px dotted black;
