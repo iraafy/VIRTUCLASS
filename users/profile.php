@@ -1,94 +1,95 @@
 <?php
-	include '../conn.php';
-	session_start();
-	if( !isset($_SESSION["login"]))
-	{
-		header("Location: ../login.php");
-		exit;
-	}
-	$user = mysqli_query($conn, 'SELECT * FROM user'); 
+include '../conn.php';
+session_start();
+if (!isset($_SESSION["login"])) {
+    header("Location: ../login.php");
+    exit;
+}
+$user = mysqli_query($conn, 'SELECT * FROM user');
 ?>
 
 <!doctype html>
 <html lang="en">
+
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<link rel="stylesheet" href="assets/css/style.css">
-	<title>VirtuClass</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>VirtuClass</title>
 </head>
+
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top mb-5" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
-		<div class="container ps-4 pe-4">
-			<a class="navbar-brand" href="../index.php">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top mb-5" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
+        <div class="container ps-4 pe-4">
+            <a class="navbar-brand" href="../index.php">
                 <img src="../assets/img/virtuclass_logo.svg" width="50px" alt="virtuclass-logo">
             </a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav ms-auto">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-						<a class="nav-link" href="../index.php">Home&emsp;</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="course/kelas.php">Course&emsp;</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="../index.php#about">About&emsp;</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="../index.php#faq">FAQ&emsp;</a>
-					</li>
-					<li class="nav-item p-0">
-						<div class="dropdown">
-							<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-							<span class="iconify" style="font-size: 25px; color: black" data-icon="healthicons:ui-user-profile-outline"></span>
-							</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								<a class="dropdown-item" href="profil.php">
-								<?php
-									if(!isset($_SESSION["login"])) {
-										echo "Profil";
-									} else {
-										echo $_SESSION["id"];
-									}
-								?>
-								</a>
-								<?php
-								if(isset($_SESSION["login"])) {
-									echo 
-									"
+                        <a class="nav-link" href="../index.php">Home&emsp;</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="course/kelas.php">Course&emsp;</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.php#about">About&emsp;</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.php#faq">FAQ&emsp;</a>
+                    </li>
+                    <li class="nav-item p-0">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="iconify" style="font-size: 25px; color: black" data-icon="healthicons:ui-user-profile-outline"></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <a class="dropdown-item" href="profil.php">
+                                    <?php
+                                    if (!isset($_SESSION["login"])) {
+                                        echo "Profil";
+                                    } else {
+                                        echo $_SESSION["id"];
+                                    }
+                                    ?>
+                                </a>
+                                <?php
+                                if (isset($_SESSION["login"])) {
+                                    echo
+                                    "
 									<a class='dropdown-item' href='../logout.php'>
 										Keluar
 									</a>
 									";
-								} else {
-									echo 
-									"
+                                } else {
+                                    echo
+                                    "
 									<a class='dropdown-item' href='../login.php'>
 										Masuk
 									</a>
 									";
-								}
-								?>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div class="container mt-5 pt-5">
         <div class="card" style="background-color: #991311; border-radius: 15px; color: white;">
             <div class="card-body p-5">
                 <h1>
-                    <b> 
+                    <b>
                         <?php foreach ($user as $key) { ?>
                             <?php if ($key['id_user'] == $_SESSION["id"]) { ?>
                                 <?php echo $key['nama_user']; ?>
@@ -104,7 +105,7 @@
                     <?php } ?>
                 </h5>
             </div>
-        </div> 
+        </div>
 
         <div class="row mt-3">
             <div class="col-lg-4 col-md-4 col-sm-12 col-12 border-right p-3">
@@ -157,12 +158,36 @@
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-phb" role="tabpanel" aria-labelledby="nav-phb-tab">
+                                <label class="mt-3 mb-2" for="selectedCategoryFilter"><b>Mata Pelajaran</b></label>
+                                <div class="input-group">
+                                    <select class="form-select" id="selectedCategoryFilter">
+                                        <option value="1">Fisika</option>
+                                        <option value="2">Kimia</option>
+                                        <option value="3">Biologi</option>
+                                    </select>
+                                </div>
                                 <canvas class="mt-4" id="chartPHB" style="width:100%; max-width:600px"></canvas>
                             </div>
                             <div class="tab-pane fade" id="nav-uts" role="tabpanel" aria-labelledby="nav-uts-tab">
+                                <label class="mt-3 mb-2" for="selectedCategoryFilter"><b>Mata Pelajaran</b></label>
+                                <div class="input-group">
+                                    <select class="form-select" id="selectedCategoryFilter">
+                                        <option value="1">Fisika</option>
+                                        <option value="2">Kimia</option>
+                                        <option value="3">Biologi</option>
+                                    </select>
+                                </div>
                                 <canvas class="mt-4" id="chartUTS" style="width:100%;max-width:600px"></canvas>
                             </div>
                             <div class="tab-pane fade" id="nav-uas" role="tabpanel" aria-labelledby="nav-uas-tab">
+                                <label class="mt-3 mb-2" for="selectedCategoryFilter"><b>Mata Pelajaran</b></label>
+                                <div class="input-group">
+                                    <select class="form-select" id="selectedCategoryFilter">
+                                        <option value="1">Fisika</option>
+                                        <option value="2">Kimia</option>
+                                        <option value="3">Biologi</option>
+                                    </select>
+                                </div>
                                 <canvas class="mt-4" id="chartUAS" style="width:100%; max-width:600px"></canvas>
                             </div>
                             <div class="tab-pane fade" id="nav-upload" role="tabpanel" aria-labelledby="nav-upload-tab">
@@ -183,7 +208,7 @@
                                     <div class="input-group">
                                         <input type="file" class="form-control" id="inputGroupFile02">
                                     </div>
-                                    <button type="submit" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
+                                    <button type="submit" class="btn mt-4" style="float: right; background-color: #991311; color: white;">Upload</button>
                                 </form>
                             </div>
                         </div>
@@ -194,90 +219,112 @@
     </div>
     <br><br><br>
 
-	<!-- iconify -->
-	<script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
-	<!-- Option 1: Bootstrap Bundle with Popper -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- iconify -->
+    <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         var myModal = document.getElementById('myModal')
         var myInput = document.getElementById('myInput')
 
-        myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
+        myModal.addEventListener('shown.bs.modal', function() {
+            myInput.focus()
         })
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script>
-        var xValues = ["SEM-1","SEM-2","SEM-3","SEM-4","SEM-5","SEM-6"];
-        var yValues = [53,89,82,78,94,65,79];
+        var xValues = ["SEM-1", "SEM-2", "SEM-3", "SEM-4", "SEM-5", "SEM-6"];
+        var yValues = [53, 89, 82, 78, 94, 65, 79];
 
         new Chart("chartPHB", {
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [{
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "rgba(0,0,255,1.0)",
-            borderColor: "rgba(0,0,255,0.1)",
-            data: yValues
-            }]
-        },
-        options: {
-            legend: {display: false},
-            scales: {
-            yAxes: [{ticks: {min: 0, max:100}}],
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 100
+                        }
+                    }],
+                }
             }
-        }
         });
     </script>
     <script>
-        var xValues = ["SEM-1","SEM-2","SEM-3","SEM-4","SEM-5","SEM-6"];
-        var yValues = [79,75,81,88,91,85,87];
+        var xValues = ["SEM-1", "SEM-2", "SEM-3", "SEM-4", "SEM-5", "SEM-6"];
+        var yValues = [79, 75, 81, 88, 91, 85, 87];
 
         new Chart("chartUTS", {
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [{
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "rgba(0,0,255,1.0)",
-            borderColor: "rgba(0,0,255,0.1)",
-            data: yValues
-            }]
-        },
-        options: {
-            legend: {display: false},
-            scales: {
-            yAxes: [{ticks: {min: 0, max:100}}],
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 100
+                        }
+                    }],
+                }
             }
-        }
         });
     </script>
     <script>
-        var xValues = ["SEM-1","SEM-2","SEM-3","SEM-4","SEM-5","SEM-6"];
-        var yValues = [83,89,82,68,84,85,69];
+        var xValues = ["SEM-1", "SEM-2", "SEM-3", "SEM-4", "SEM-5", "SEM-6"];
+        var yValues = [83, 89, 82, 68, 84, 85, 69];
 
         new Chart("chartUAS", {
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [{
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "rgba(0,0,255,1.0)",
-            borderColor: "rgba(0,0,255,0.1)",
-            data: yValues
-            }]
-        },
-        options: {
-            legend: {display: false},
-            scales: {
-            yAxes: [{ticks: {min: 0, max:100}}],
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 100
+                        }
+                    }],
+                }
             }
-        }
         });
     </script>
 </body>
+
 </html>
