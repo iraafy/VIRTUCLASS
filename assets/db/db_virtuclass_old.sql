@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2022 at 06:25 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.28
+-- Generation Time: Apr 11, 2022 at 09:30 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -76,19 +76,6 @@ INSERT INTO `course` (`id_course`, `nama_course`, `url_bg`, `desc_course`, `id_k
 -- --------------------------------------------------------
 
 --
--- Table structure for table `guru`
---
-
-CREATE TABLE `guru` (
-  `id_guru` int(11) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `kelas`
 --
 
@@ -106,8 +93,7 @@ INSERT INTO `kelas` (`id_kelas`, `nama_kelas`) VALUES
 (2, 'X'),
 (3, 'XI'),
 (4, ''),
-(5, 'XII'),
-(6, 'Umum');
+(5, 'XII');
 
 -- --------------------------------------------------------
 
@@ -131,9 +117,7 @@ INSERT INTO `modul` (`id_modul`, `nama_modul`, `id_course`) VALUES
 (3, 'Besaran dan satuan', 5),
 (4, 'Suhu dan kalor', 4),
 (5, 'Teori Atom', 6),
-(6, 'Modul baru', 10),
-(7, 'SPLTV', 1),
-(8, 'SPLEV', 1);
+(6, 'Modul baru', 10);
 
 -- --------------------------------------------------------
 
@@ -283,12 +267,7 @@ INSERT INTO `submodul` (`id_submodul`, `judul_content`, `content`, `id_modul`) V
 (12, 'nadjnajf', 'afnmasnmfnam', 6),
 (13, 'baru ni', 'adkjakda', 2),
 (14, 'cobaaaaa', 'andmada', 2),
-(15, 'badban', 'adnab', 4),
-(16, 'cek video  youtube', '<iframe style=\"width: 100%; height: 710px; overflow: auto;\" src=\"https://www.youtube.com/embed/0JqvJ8oEvg0\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>', 1),
-(17, 'Cek konten dan gambar', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam aliquet mi et orci malesuada, accumsan maximus leo viverra. Nam porta ut magna sit amet faucibus. Aliquam gravida tellus at tincidunt ultrices. Proin nunc lorem, imperdiet eu velit sit amet, tempus rutrum magna. Suspendisse faucibus velit ex. Integer ex tellus, tincidunt a ultricies non, pretium sed sapien. Cras sed felis at eros lobortis pellentesque quis et lacus. Proin tristique lacus vitae magna ornare hendrerit. Aenean cursus, ipsum nec dignissim tempus, metus ligula congue velit, eu eleifend odio ipsum eget ante. Proin ac aliquam nunc. Sed consectetur in turpis id cursus. In vestibulum varius placerat. Suspendisse potenti. Sed iaculis tempor massa dignissim facilisis. Donec fringilla, lectus vitae tempus feugiat, tellus sem condimentum sem, in malesuada sem erat in neque.</br>\r\n</br>\r\nMauris sodales convallis egestas. Mauris congue tortor et dictum ornare. Praesent viverra lacinia elit, eu posuere dolor hendrerit sit amet. Aenean ullamcorper dui at nulla hendrerit tincidunt. Donec eu velit et tellus pharetra viverra at at orci. Donec sed dui vitae lacus lobortis consequat. Proin a ante vel nisi sodales finibus. Phasellus ac interdum mi, ac dapibus eros. Suspendisse at iaculis velit.</br>\r\n</br>\r\n<img src=\"https://images.theconversation.com/files/458000/original/file-20220413-16-ptwkj1.jpg?ixlib=rb-1.1.0&rect=23%2C746%2C5014%2C2507&q=45&auto=format&w=668&h=324&fit=crop\" alt=\"fisika\"></br>\r\n</br>\r\nOrci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce eget placerat elit. In quis eleifend leo. In quis ex a odio efficitur congue non ac ligula. Etiam tincidunt augue lectus, sed mattis ex consequat quis. Vivamus quis velit eu magna mollis maximus. Mauris lectus felis, euismod a volutpat sed, venenatis id est. Nunc lorem ex, rutrum ut lacus ac, venenatis fermentum leo. Donec tempus volutpat libero, bibendum egestas risus laoreet sed. Morbi pretium ac mauris vitae imperdiet. Nullam eu scelerisque metus. Ut viverra eleifend ipsum id cursus. Etiam feugiat iaculis viverra. Vivamus scelerisque non dui ac mattis.</br>\r\n<img src=\"https://i.ytimg.com/vi/Q_qgWQXc5io/maxresdefault.jpg\" alt=\"monyet joged\"></br>\r\n</br>\r\nInteger et volutpat leo. Etiam metus orci, pellentesque consequat varius at, placerat et odio. Etiam eget ligula non purus commodo laoreet in eget est. Nulla vel erat quam. Nulla facilisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum malesuada dui vel imperdiet tristique. Suspendisse at nunc sit amet dui sollicitudin vulputate id id nulla.', 1),
-(18, 'Fisika Kuantum', '<iframe style=\"width: 100%; height: 710px; overflow: auto;\"  src=\"https://www.youtube.com/embed/GT7HS_gZoOM\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>', 4),
-(19, 'Video 2', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/JVANLCfV70w\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>', 7),
-(20, 'HOHOHIHE', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/jDaEkGZ8mZI\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>', 8);
+(15, 'badban', 'adnab', 4);
 
 -- --------------------------------------------------------
 
@@ -315,20 +294,46 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `nama_user`, `asal_sekolah`, `jk`, `email`, `telepon`, `password`, `kartu_pelajar`, `validated`) VALUES
 (1, 'Iqbal', 'SMA 1', 'Laki-Laki', 'Iqbal@mail.com', '000011112222', 'Iqbal123', '', 1),
 (2, 'Rahmat', 'SMA 2', 'Laki-Laki', 'Rahmat@mail.com', '000011112222', 'Rahmat123', '', 1),
-(3, 'Azka', 'SMA 3', 'Laki-Laki', 'Azka@mail.com', '000011112222', 'Azka123', '', 1),
+(3, 'Azka', 'SMA 3', 'Laki-Laki', 'Azka@mail.com', '000011112222', 'Azka123', '', 0),
 (4, 'Iraa', 'SMA 4', 'Perempuan', 'Iraa@mail.com', '000011112222', 'Iraa123', '', 1),
 (5, 'Aysha', 'SMA 5', 'Perempuan', 'Aysha@mail.com', '000011112222', 'Aysha123', '', 0),
 (6, 'Zahra', 'SMA 6', 'Perempuan', 'Zahra@mail.com', '000011112222', 'Zahra123', '', 0),
 (7, 'Abighail', 'SMA 7', 'Perempuan', 'Abighail@mail.com', '000011112222', 'Abighail123', '', 0),
+(8, 'data dummy', 'SMK Asal', '', 'coba@mail.com', '', '123', 'Capture.PNG', 0),
 (9, 'data dummy', 'SMK Asal', '', 'admin1@mail.com', '', '123', 'Capture.PNG', 0),
 (10, 'data dummy2', 'Sekolah Menengah Kejuruan 200 Bandung', '', 'dmmy@mail.com', '09889791', 'dummy123', 'Capture.PNG', 1),
 (11, 'coba', 'coba', 'Perempuan', 'coba', 'coba', 'coba', 'coba', 0),
 (12, 'bsdhdbh', 'sjdhjhsj', 'Laki-Laki', 'jahdjfh@jsdfj.com', '72567265', '123', 'Untitled Diagram.drawio (6).png', 0),
 (13, 'jdjhd', 'kdfjkhdaj', 'Perempuan', 'iraaaa@mail.com', '358773', '123', 'Untitled Diagram.drawio (6).png', 1),
 (14, 'coba', 'Sekolah Menengah Kejuruan Coba', 'Perempuan', 'cobaa@mail.com', '0983959275', '123', '1-Untitled Diagram.drawio (6).png', 0),
+(15, 'coba', 'coba', 'Perempuan', 'coba', 'coba', 'coba', 'coba', 0),
+(16, 'coba', 'coba', 'Perempuan', 'coba', 'coba', 'coba', 'coba', 0),
+(17, 'bsdhdbh', 'Sekolah Menengah Kejuruan 200 Bandung', 'Laki-Laki', 'Iqbal@mail.com', '0987654321', '123', '1-Untitled Diagram.drawio (6).png', 0),
+(18, 'bsdhdbh', 'Sekolah Menengah Kejuruan 200 Bandung', 'Laki-Laki', 'Iqbal@mail.com', '0987654321', '123', 'Iqbal-Untitled Diagram.drawio (6).png', 0),
+(19, 'bsdhdbh', 'Sekolah Menengah Kejuruan 200 Bandung', 'Laki-Laki', 'Iqbal@mail.com', '0987654321', '123', '-Untitled Diagram.drawio (6).png', 0),
+(20, 'jhsaj', 'hdaja', 'Perempuan', 'jdshjsh@hsdh.com', '752232', '123', '-Untitled Diagram.drawio (3).png', 0),
+(21, 'jhsaj', 'hdaja', 'Perempuan', 'jdshjsh@hsdh.com', '752232', '123', '-Untitled Diagram.drawio (3).png', 0),
+(22, 'jhsaj', 'hdaja', 'Perempuan', 'jdshjsh@hsdh.com', '752232', '123', '-Untitled Diagram.drawio (3).png', 0),
+(23, 'jhsaj', 'hdaja', 'Perempuan', 'jdshjsh@hsdh.com', '752232', '123', '2Rahmat-Untitled Diagram.drawio (3).png', 0),
+(24, 'jhsaj', 'hdaja', 'Perempuan', 'jdshjsh@hsdh.com', '752232', '123', '1-Untitled Diagram.drawio (3).png', 1),
+(25, 'jhsaj', 'hdaja', 'Perempuan', 'jdshjsh@hsdh.com', '752232', '123', '7b5ae62f77b9609a98b4bf4d86d9c23a', 0),
+(26, 'jhsaj', 'hdaja', 'Perempuan', 'jdshjsh@hsdh.com', '752232', '123', '170aaef5657ef1f812b7dfe36ea44486', 0),
+(27, 'jhsaj', 'hdaja', 'Perempuan', 'jdshjsh@hsdh.com', '752232', '123', 'ad9bd07894921fe5c823e820ad6fce18', 0),
+(28, 'jhsaj', 'hdaja', 'Perempuan', 'jdshjsh@hsdh.com', '752232', '123', '70ee5443560055b725346e8c256ea31a', 0),
+(29, 'jhsaj', 'hdaja', 'Perempuan', 'jdshjsh@hsdh.com', '752232', '123', '6efdecbe39cf6fadd716ea65cef70b80', 0),
+(30, 'data dummy', 'Sekolah Menengah Kejuruan Coba', 'Laki-Laki', 'coba@mail.com', '0987654321', '123', 'c36f0ac8f277eb7ce347bf40a2b87a96', 0),
+(31, 'data dummy', 'Sekolah Menengah Kejuruan Coba', 'Laki-Laki', 'coba@mail.com', '0987654321', '123', 'e5d03dba161a91359decbd7c57b6cc2b', 0),
 (32, 'daghg', 'adghg', 'Perempuan', 'jdhfj@sf.svik', '83275925', '123', 'b70f495d81a98b2991ee7191ea5d815b', 0),
+(33, 'coba', 'coba', 'Perempuan', 'coba', 'coba', 'coba', 'coba', 0),
 (34, 'hdfjkahjhd', 'dsgjhsj', 'Perempuan', 'sjsa@ksjf.coja', '185782', '123', 'a917276f30546e6d8442c5235e8ec237', 0),
-(39, 'jadjfh', 'jdhja', 'Perempuan', 'ajhdj@lks.vsn', '0983959275', '123', '881d559e96a3cfae34df7144d68ae57c-Untitled Diagram.drawio (6).png', 0);
+(35, 'bsdhdbh', 'Sekolah Menengah Kejuruan Coba', 'Perempuan', 'coba@mail.com', '0987654321', '123', 'b75444fa41d439a8ac5e73accd7673fa', 0),
+(36, 'bsdhdbh', 'Sekolah Menengah Kejuruan Coba', 'Laki-Laki', 'Iqbal@mail.com', '0987654321', '123', '1c925cbb18f8eb00d8aeb06679bd2b0aUntitled Diagram.drawio (4).png', 0),
+(37, 'bsdhdbh', 'Sekolah Menengah Kejuruan Coba', 'Laki-Laki', 'Iqbal@mail.com', '0987654321', '123', 'e5372a45613751b233087cdc9792786d-Untitled Diagram.drawio (4).png', 1),
+(38, 'bsdhdbh', 'Sekolah Menengah Kejuruan Coba', 'Laki-Laki', 'Iqbal@mail.com', '0987654321', '123', 'f19f18015cbcdec46063e74c02643afe-Untitled Diagram.drawio (4).png', 0),
+(39, 'jadjfh', 'jdhja', 'Perempuan', 'ajhdj@lks.vsn', '0983959275', '123', '881d559e96a3cfae34df7144d68ae57c-Untitled Diagram.drawio (6).png', 0),
+(40, 'data dummy', 'Sekolah Menengah Kejuruan 200 Bandung', 'Perempuan', 'coba@mail.com', '0987654321', '123', '1c432e6338b85f7b09986134274d51d8-Untitled Diagram.drawio (6).png', 0),
+(41, 'data dummy2', 'samn', 'Perempuan', 'sjsa@ksjf.coja', '32590', '123', '2797dde79c423af212544d9651f38f1c-Untitled Diagram.drawio (6).png', 0),
+(42, 'bsdhdbh', 'Sekolah Menengah Kejuruan 200 Bandung', 'Perempuan', 'coba@mail.com', '0987654321', '123', '47fe38cf5657735dee97d0d5288251ec-Untitled Diagram.drawio (6).png', 0);
 
 --
 -- Indexes for dumped tables
@@ -346,12 +351,6 @@ ALTER TABLE `admin`
 ALTER TABLE `course`
   ADD PRIMARY KEY (`id_course`),
   ADD KEY `id_kelas` (`id_kelas`);
-
---
--- Indexes for table `guru`
---
-ALTER TABLE `guru`
-  ADD PRIMARY KEY (`id_guru`);
 
 --
 -- Indexes for table `kelas`
@@ -386,8 +385,7 @@ ALTER TABLE `submodul`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id_user`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -406,22 +404,16 @@ ALTER TABLE `course`
   MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `guru`
---
-ALTER TABLE `guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `modul`
 --
 ALTER TABLE `modul`
-  MODIFY `id_modul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_modul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `record_siswa`
@@ -433,7 +425,7 @@ ALTER TABLE `record_siswa`
 -- AUTO_INCREMENT for table `submodul`
 --
 ALTER TABLE `submodul`
-  MODIFY `id_submodul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_submodul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user`
