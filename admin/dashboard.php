@@ -36,6 +36,9 @@
 						<a class="nav-link" href="uploadMateri.php">Materi&emsp;</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" href="mgmt_guru.php">DaftarGuru&emsp;</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link" href="dashboard.php"><b>Dashboard Nilai</b>&emsp;</a>
 					</li>
 					<li class="nav-item">

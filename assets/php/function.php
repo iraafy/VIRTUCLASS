@@ -83,4 +83,34 @@
         return mysqli_affected_rows($conn);
     }
 
+    function upload_guru($data)
+    {
+        global $conn;
+        $nama = $data["nama"];
+        $email = $data["email"];
+        $password = $data["password"];
+        $rep_password = $data["rep_password"];
+
+        if($password != $rep_password){
+            echo "<script>
+                    alert('Pastikan password yang anda masukkan sama!');
+                </script>";
+
+            return false;
+        }
+
+        $result = mysqli_query($conn, "SELECT email FROM guru WHERE email = '$email'");
+        if( mysqli_fetch_assoc($result) )
+        {
+            echo "<script>
+                    alert('Data guru sudah tersedia!');
+                </script>";
+
+            return false;
+        }
+
+        mysqli_query($conn, "INSERT INTO guru VALUES('', '$nama', '$email', '$password')");
+        return mysqli_affected_rows($conn);
+    }
+
 ?>

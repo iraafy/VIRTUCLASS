@@ -101,6 +101,9 @@
 						<a class="nav-link" href="uploadMateri.php"><b>Materi</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" href="mgmt_guru.php">DaftarGuru&emsp;</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link" href="Dashboard.php">Dashboard Nilai&emsp;</a>
 					</li>
 					<li class="nav-item">
