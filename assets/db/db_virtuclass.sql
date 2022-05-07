@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2022 at 06:25 AM
+-- Generation Time: May 07, 2022 at 06:58 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -85,6 +85,14 @@ CREATE TABLE `guru` (
   `email` varchar(255) NOT NULL,
   `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `guru`
+--
+
+INSERT INTO `guru` (`id_guru`, `nama`, `email`, `password`) VALUES
+(2, 'Budiman', 'budiman@mail.com', 'budiman'),
+(3, 'ani', 'ani@mail.com', 'ani');
 
 -- --------------------------------------------------------
 
@@ -409,7 +417,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kelas`
