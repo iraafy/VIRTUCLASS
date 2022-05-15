@@ -27,7 +27,7 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-						<a class="nav-link" href="index.php">Home&emsp;</a>
+						<a class="nav-link" href="index.php"><b>Home</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="users/course/kelas.php">Course&emsp;</a>
@@ -49,7 +49,7 @@
 										if(!isset($_SESSION["login"])) {
 											echo "Profil";
 										} else {
-											echo $_SESSION['id'];
+											echo $_SESSION["username"];
 										}
 									?>
 								</a>
@@ -58,7 +58,7 @@
 										echo 
 										"
 										<a class='dropdown-item' href='logout.php'>
-											Keluar
+											<span class='iconify-inline' data-icon='carbon:logout'></span>
 										</a>
 										";
 									} else {

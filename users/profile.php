@@ -6,6 +6,7 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 $user = mysqli_query($conn, 'SELECT * FROM user');
+$record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
 ?>
 
 <!doctype html>
@@ -56,7 +57,7 @@ $user = mysqli_query($conn, 'SELECT * FROM user');
                                     if (!isset($_SESSION["login"])) {
                                         echo "Profil";
                                     } else {
-                                        echo $_SESSION["id"];
+                                        echo $_SESSION["username"];
                                     }
                                     ?>
                                 </a>
@@ -65,7 +66,7 @@ $user = mysqli_query($conn, 'SELECT * FROM user');
                                     echo
                                     "
 									<a class='dropdown-item' href='../logout.php'>
-										Keluar
+                                        <span class='iconify-inline' data-icon='carbon:logout'></span>
 									</a>
 									";
                                 } else {
@@ -158,23 +159,30 @@ $user = mysqli_query($conn, 'SELECT * FROM user');
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-phb" role="tabpanel" aria-labelledby="nav-phb-tab">
-                                <label class="mt-3 mb-2" for="selectedCategoryFilter"><b>Mata Pelajaran</b></label>
-                                <div class="input-group">
-                                    <select class="form-select" id="selectedCategoryFilter">
-                                        <option value="1">Fisika</option>
-                                        <option value="2">Kimia</option>
-                                        <option value="3">Biologi</option>
-                                    </select>
-                                </div>
+                                <label class="mt-3 mb-2" for="selectedCategoryFilter"><b>Course</b></label>
+                                <form action="" method="post">
+                                    <div class="input-group">
+                                        <select name="coursePHB" class="form-select" id="coursePHB" onchange="findmyvalue()">
+                                            <?php 
+                                                $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course GROUP BY nama_course");
+                                                while ($row = mysqli_fetch_array($sql)) { ?>
+                                                <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </form>
+                                
                                 <canvas class="mt-4" id="chartPHB" style="width:100%; max-width:600px"></canvas>
                             </div>
                             <div class="tab-pane fade" id="nav-uts" role="tabpanel" aria-labelledby="nav-uts-tab">
                                 <label class="mt-3 mb-2" for="selectedCategoryFilter"><b>Mata Pelajaran</b></label>
                                 <div class="input-group">
-                                    <select class="form-select" id="selectedCategoryFilter">
-                                        <option value="1">Fisika</option>
-                                        <option value="2">Kimia</option>
-                                        <option value="3">Biologi</option>
+                                    <select name="courseUTS" class="form-select" id="courseUTS">
+                                        <?php 
+                                            $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course GROUP BY nama_course");
+                                            while ($row = mysqli_fetch_array($sql)) { ?>
+                                            <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <canvas class="mt-4" id="chartUTS" style="width:100%;max-width:600px"></canvas>
@@ -182,10 +190,12 @@ $user = mysqli_query($conn, 'SELECT * FROM user');
                             <div class="tab-pane fade" id="nav-uas" role="tabpanel" aria-labelledby="nav-uas-tab">
                                 <label class="mt-3 mb-2" for="selectedCategoryFilter"><b>Mata Pelajaran</b></label>
                                 <div class="input-group">
-                                    <select class="form-select" id="selectedCategoryFilter">
-                                        <option value="1">Fisika</option>
-                                        <option value="2">Kimia</option>
-                                        <option value="3">Biologi</option>
+                                    <select name="courseUAS" class="form-select" id="courseUAS" >
+                                        <?php 
+                                            $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course GROUP BY nama_course");
+                                            while ($row = mysqli_fetch_array($sql)) { ?>
+                                            <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <canvas class="mt-4" id="chartUAS" style="width:100%; max-width:600px"></canvas>
@@ -198,6 +208,16 @@ $user = mysqli_query($conn, 'SELECT * FROM user');
                                             <option value="PHB">PHB</option>
                                             <option value="UTS">UTS</option>
                                             <option value="UAS">UAS</option>
+                                        </select>
+                                    </div>
+                                    <label class="mt-3 mb-2" for="inputGroupSelect01"><b>Course</b></label>
+                                    <div class="input-group">
+                                        <select name="courseDataNilai" class="form-select" id="courseDataNilai">
+                                            <?php 
+                                                $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course GROUP BY nama_course");
+                                                while ($row = mysqli_fetch_array($sql)) { ?>
+                                                <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'] . $row['id_course'];?> </option>;
+                                            <?php } ?>
                                         </select>
                                     </div>
                                     <label class="mt-3 mb-2"><b>Nilai</b></label>
@@ -223,6 +243,12 @@ $user = mysqli_query($conn, 'SELECT * FROM user');
     <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function findmyvalue()
+        {
+            myval = document.getElementById("courseUAS").value;
+        }
+    </script>
     <script>
         var myModal = document.getElementById('myModal')
         var myInput = document.getElementById('myInput')
@@ -233,8 +259,25 @@ $user = mysqli_query($conn, 'SELECT * FROM user');
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script>
-        var xValues = ["SEM-1", "SEM-2", "SEM-3", "SEM-4", "SEM-5", "SEM-6"];
-        var yValues = [53, 89, 82, 78, 94, 65, 79];
+        <?php  
+            $nilai = array(); 
+            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='PHB' AND id_course = '<script>document.write(myval);</script>'");
+            $nilai = mysqli_fetch_all($nilai_sql);
+
+            $tanggal = array(); 
+            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='PHB' AND id_course = '<script>document.write(myval);</script>'");
+            $tanggal = mysqli_fetch_all($tanggal_sql);
+        ?>
+
+        var data_tanggal = [ <?= json_encode($tanggal); ?> ];  
+        for (i = 0; i < data_tanggal.length; i++) {
+            xValues = data_tanggal[i];
+        }
+
+        var data_nilai = [ <?= json_encode($nilai); ?> ];  
+        for (j = 0; j < data_nilai.length; j++) {
+            yValues = data_nilai[j];      
+        }
 
         new Chart("chartPHB", {
             type: "line",
@@ -264,8 +307,25 @@ $user = mysqli_query($conn, 'SELECT * FROM user');
         });
     </script>
     <script>
-        var xValues = ["SEM-1", "SEM-2", "SEM-3", "SEM-4", "SEM-5", "SEM-6"];
-        var yValues = [79, 75, 81, 88, 91, 85, 87];
+        <?php  
+            $nilai = array(); 
+            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='UTS'");
+            $nilai = mysqli_fetch_all($nilai_sql);
+
+            $tanggal = array(); 
+            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='UTS'");
+            $tanggal = mysqli_fetch_all($tanggal_sql);
+        ?>
+
+        var data_tanggal = [ <?= json_encode($tanggal); ?> ];  
+        for (i = 0; i < data_tanggal.length; i++) {
+            xValues = data_tanggal[i];
+        }
+
+        var data_nilai = [ <?= json_encode($nilai); ?> ];  
+        for (j = 0; j < data_nilai.length; j++) {
+            yValues = data_nilai[j];      
+        }
 
         new Chart("chartUTS", {
             type: "line",
@@ -295,8 +355,25 @@ $user = mysqli_query($conn, 'SELECT * FROM user');
         });
     </script>
     <script>
-        var xValues = ["SEM-1", "SEM-2", "SEM-3", "SEM-4", "SEM-5", "SEM-6"];
-        var yValues = [83, 89, 82, 68, 84, 85, 69];
+        <?php  
+            $nilai = array(); 
+            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='UAS'");
+            $nilai = mysqli_fetch_all($nilai_sql);
+
+            $tanggal = array(); 
+            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='UAS'");
+            $tanggal = mysqli_fetch_all($tanggal_sql);
+        ?>
+
+        var data_tanggal = [ <?= json_encode($tanggal); ?> ];  
+        for (i = 0; i < data_tanggal.length; i++) {
+            xValues = data_tanggal[i];
+        }
+
+        var data_nilai = [ <?= json_encode($nilai); ?> ];  
+        for (j = 0; j < data_nilai.length; j++) {
+            yValues = data_nilai[j];      
+        }
 
         new Chart("chartUAS", {
             type: "line",

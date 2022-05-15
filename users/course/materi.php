@@ -59,8 +59,8 @@
 									if(!isset($_SESSION["login"])) {
 										echo "Profil";
 									} else {
-										echo $_COOKIE['username'];
-									}
+                                        echo $_SESSION["username"];
+                                    }
 								?>
 								</a>
 								<?php
