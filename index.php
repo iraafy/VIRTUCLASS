@@ -179,7 +179,7 @@
 						<img src="assets/img/bro.png" class="pict" alt="">
 					</div>
 					<div class="cardBottom spaceContent">
-						<h6 style="font-weight: 700;" class="mb-3">Lorem Ipsum</h6>
+						<h6 style="font-weight: 700;" class="mb-3">Ahmad Hidayat</h6>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 					</div>
 				</div>
@@ -292,12 +292,12 @@
 			<div class="col-lg col-sm-12 space flex">
 				<div class="card shadow" style="border-radius: 10px !important;">
 					<div class="card-body p-3">
-						<img src="assets/img/Ellipse.png" class="rounded mx-auto d-block mt-4 mb-3" alt="">
+						<img src="assets\img\ahday.jpeg" class="rounded mx-auto d-block mt-4 mb-3" alt="">
 						<div class="card-body">
 							<h5 class="card-title mb-4" style="text-align: center;">
-								<b>Lorem Ipsum</b>
+								<b>Ahmad Hidayat</b>
 							</h5>
-							<p class="card-text" style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit elementum neque viverra imperdiet in donec.</p>
+							<p class="card-text" style="text-align: justify;">Seraf tolong maju seraf, ajarin teman-temannya.</p>
 						</div>
 					</div>
 				</div>
@@ -343,7 +343,7 @@
 			<div class="accordion-item m-3" style="border: 1px solid lightgrey; border-radius: 10px;">
 				<h2 class="accordion-header" id="flush-headingOne">
 				<button class="accordion-button collapsed" style="background-color: white !important;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-					Accordion Item #1
+					Bagaimana cara ikut belajar di Virtuclass.id?
 				</button>
 				</h2>
 				<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -353,7 +353,7 @@
 			<div class="accordion-item m-3" style="border: 1px solid lightgrey; border-radius: 10px;">
 				<h2 class="accordion-header" id="flush-headingTwo">
 				<button class="accordion-button collapsed" style="background-color: white !important;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-					Accordion Item #2
+					Apakah Virtuclass.id membuka kelas mata pelajaran IPS?
 				</button>
 				</h2>
 				<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
@@ -363,10 +363,30 @@
 			<div class="accordion-item m-3" style="border: 1px solid lightgrey; border-radius: 10px;">
 				<h2 class="accordion-header" id="flush-headingThree">
 				<button class="accordion-button collapsed" style="background-color: white !important;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-					Accordion Item #3
+					Bagaimana sistem pembelajaran di Virtuclass.id?
 				</button>
 				</h2>
 				<div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body p-5" style="background-color: white !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+				</div>
+			</div>
+			<div class="accordion-item m-4" style="border: 1px solid lightgrey; border-radius: 10px;">
+				<h2 class="accordion-header" id="flush-headingFour">
+				<button class="accordion-button collapsed" style="background-color: white !important;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseThree">
+					Berapakah biaya yang harus dikeluarkan untuk mengikuti kegiatan belajar di Virtuclass.id?
+				</button>
+				</h2>
+				<div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body p-5" style="background-color: white !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+				</div>
+			</div>
+			<div class="accordion-item m-4" style="border: 1px solid lightgrey; border-radius: 10px;">
+				<h2 class="accordion-header" id="flush-headingFive">
+				<button class="accordion-button collapsed" style="background-color: white !important;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseThree">
+					Apa saja syarat dan ketentuan mengikuti program-program Virtuclass?
+				</button>
+				</h2>
+				<div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
 					<div class="accordion-body p-5" style="background-color: white !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
 				</div>
 			</div>
