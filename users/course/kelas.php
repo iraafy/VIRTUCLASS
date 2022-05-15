@@ -8,6 +8,8 @@
 	}
 	$kelas = mysqli_query($conn, 'SELECT * FROM kelas'); 
 	$course = mysqli_query($conn, 'SELECT * FROM course');                                
+	$user = mysqli_query($conn, 'SELECT * FROM user');                                
+	$sql = mysqli_query($conn,"SELECT nama_kelas FROM kelas GROUP BY nama_kelas");
 ?>
 
 <!doctype html>
@@ -38,7 +40,7 @@
 						<a class="nav-link" href="../../index.php">Home&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="kelas.php">Course&emsp;</a>
+						<a class="nav-link" href="kelas.php"><b>Course</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="../../index.php#about">About&emsp;</a>
@@ -57,16 +59,16 @@
 									if(!isset($_SESSION["login"])) {
 										echo "Profil";
 									} else {
-										echo $_SESSION["id"];
-									}
+                                        echo $_SESSION["username"];
+                                    }
 								?>
 								</a>
 								<?php
 									if(isset($_SESSION["login"])) {
 										echo 
 										"
-										<a class='dropdown-item' href='logout.php'>
-											Keluar
+										<a class='dropdown-item' href='../../logout.php'>
+											<span class='iconify-inline' data-icon='carbon:logout'></span>
 										</a>
 										";
 									} else {
@@ -96,47 +98,74 @@
         </div>
 
 		<div class="row mt-5">
-			<div class="accordion accordion-flush" id="accordionFlushExample">
-				<?php $i = 1; ?>
-				<?php foreach ($kelas as $keyKelas) { ?>
-					<div class="accordion-item">
-						<h2 class="accordion-header" id="flush-heading<?php echo $i; ?>">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $i; ?>" aria-expanded="true" aria-controls="flush-collapse<?php echo $i; ?>">
-								<b>
-									Kelas <?php echo $keyKelas['nama_kelas']; ?>
-									<?php 
-										$getID_Kelas = $keyKelas['id_kelas'];
-										// echo $getID_Kelas;
-										?>
-								</b>
-							</button>
-						</h2>
-						<div id="flush-collapse<?php echo $i; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php echo $i; ?>" data-bs-parent="#accordionFlushExample">
-							<div class="accordion-body">
-								<div class="row mt-4 mb-4">
-									<?php foreach ($course as $keyCourse) { ?>
-										<?php $getID_Course = $keyCourse['id_course']; ?>
-										<?php if ($keyCourse['id_kelas'] == $getID_Kelas) { ?>
-											<div class="col-lg-3 col-md-4 col-sm-6 col-6 p-2">
-												<div class="card" style="width: 18rem;">
-													<img src="<?php echo $keyCourse['url_bg']; ?>" class="card-img-top" alt="...">
-													<div class="card-body">
-														<h5 class="card-title"><?php echo $keyCourse['nama_course']; ?></h5>
-														<p class="card-text"><?php echo $keyCourse['desc_course']; ?></p>
-														<a href="materi.php?id_course=<?php echo $getID_Course?>" class="btn btn-primary">Lihat Materi</a>
-													</div>
-												</div>
-											</div>	
-										<?php } ?>
-									<?php } ?>
-								</div>
-							</div>
+			<?php foreach ($user as $keyUser) { ?>
+				<?php if ($keyUser['id_user'] == $_SESSION["id"]) { ?>
+					<?php $getkel = $keyUser['kelas']?>
+					<?php if ($keyUser['kelas'] == "null") { ?>
+						<div class="card p-4">		
+							<h5 style="color: #991311">
+								Silahkan pilih kelas terlebih dahulu, setelah memasukan data kelas anda tidak bisa merubahnya kembali.
+							</h5>
+							<p>
+								Oleh karena itu pastikan data yang dimasukan sudah sesuai. (Data kelas akan di-reset setiap tahun ajaran baru)
+							</p>
 						</div>
-					</div>
-				<?php $i++; ?>
+						<form action="" method="post">
+							<label class="m-0 p-0 mt-5 mb-2 " for="inputGroupSelect01"><b>Masukan Data Kelas</b></label>
+							<div class="input-group m-0 p-0">
+								<select name="dataKelas" class="form-select" id="dataKelas">
+									<?php foreach ($sql as $row) { ?>
+										<option value="<?= $row['nama_kelas'];?>"> <?= $row['nama_kelas']?> </option>;
+									<?php } ?>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-danger mt-3" name="update">Submit</button>
+						</form> 
+					<?php } else { ?>
+						<div class="accordion accordion-flush" id="accordionFlushExample">
+							<?php $i = 1; ?>
+							<?php foreach ($kelas as $keyKelas) { ?>
+								<?php if ($keyKelas['nama_kelas'] == $getkel) { ?>	
+									<div class="accordion-item">
+										<h2 class="accordion-header" id="flush-heading<?php echo $i; ?>">
+											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $i; ?>" aria-expanded="true" aria-controls="flush-collapse<?php echo $i; ?>">
+												<b>
+													Kelas <?php echo $keyKelas['nama_kelas']; ?>
+													<?php $getID_Kelas = $keyKelas['id_kelas']; ?>
+												</b>
+											</button>
+										</h2>
+										<div id="flush-collapse<?php echo $i; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php echo $i; ?>" data-bs-parent="#accordionFlushExample">
+											<div class="accordion-body">
+												<div class="row mt-4 mb-4">
+													<?php foreach ($course as $keyCourse) { ?>
+														<?php $getID_Course = $keyCourse['id_course']; ?>
+														<?php if ($keyCourse['id_kelas'] == $getID_Kelas) { ?>
+															<div class="col-lg-3 col-md-4 col-sm-6 col-6 p-2">
+																<div class="card" style="width: 18rem;">
+																	<img src="<?php echo $keyCourse['url_bg']; ?>" class="card-img-top" alt="...">
+																	<div class="card-body">
+																		<h5 class="card-title"><?php echo $keyCourse['nama_course']; ?></h5>
+																		<p class="card-text"><?php echo $keyCourse['desc_course']; ?></p>
+																		<a href="materi.php?id_course=<?php echo $getID_Course?>" class="btn btn-primary">Lihat Materi</a>
+																	</div>
+																</div>
+															</div>	
+														<?php } ?>
+													<?php } ?>
+												</div>
+											</div>
+										</div>
+									</div>
+								<?php } ?>
+							<?php $i++; ?>
+							<?php } ?>
+						</div>
+					<?php } ?>
 				<?php } ?>
-			</div>
+			<?php } ?>
 		</div>
+	</div>
 
 	<!-- iconify -->
 	<script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
@@ -145,3 +174,14 @@
 	
 </body>
 </html>
+
+<?php
+	if(isset($_POST['update']))
+    {
+        $pilihan = $_POST["dataKelas"];
+		$query = "UPDATE user SET kelas = '$pilihan' WHERE id_user = $_SESSION[id]";
+		mysqli_query($conn, $query);
+		header('location: kelas.php');
+    }
+
+?>

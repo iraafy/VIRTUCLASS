@@ -6,6 +6,13 @@
 	$error = 0;
 	$list_guru = mysqli_query($conn, 'select * from guru;');
 
+	function rand_string( $length ) {
+
+		$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		return substr(str_shuffle($chars),0,$length);
+	
+	}
+	
 	if(isset($_POST["upload_guru"]))
 	{
 		if( upload_guru($_POST) > 0 ) 
@@ -53,16 +60,16 @@
 						<a class="nav-link" href="admin.php">Siswa&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="uploadMateri.php">Materi&emsp;</a>
+						<a class="nav-link" href="mgmt_guru.php"><b>Guru</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="mgmt_guru.php"><b>DaftarGuru</b>&emsp;</a>
+						<a class="nav-link" href="uploadMateri.php">Materi&emsp;</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="Dashboard.php">Dashboard Nilai&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="Logout.php">Logout&emsp;</a>
+						<a class="nav-link" href="Logout.php"><span class="iconify-inline" data-icon="carbon:logout"></span></a>
 					</li>
 				</ul>
 			</div>
@@ -90,13 +97,11 @@
 		<?php } ?>
 		<div class="card mb-5" style="box-shadow: 2px 2px 10px 1px rgba(0,0,0,0.30);">
 			<div class="card-body" style="width: 100%;">
-				<nav>
-				<h3 class="text-center mt-3 mb-5" style="color: #991311">
+				<h5 class="text-center mt-3 mb-3">
 					<b>
 						Daftarkan Guru Baru
 					</b>
-				</h3>
-				</nav>
+				</h5>
 				<div class="tab-content" id="nav-tabContent">
 					<div class="tab-pane fade show active" id="nav-course" role="tabpanel" aria-labelledby="nav-course-tab">
 						<form action="" method="post">
@@ -108,15 +113,11 @@
 							<div class="input-group">
 								<input type="text" name="email" class="form-control" id="inputGroupFile02" placeholder="Email">
 							</div>
-							<label class="mt-3 mb-2"><b>Password Guru</b></label>
+							<label class="mt-3 mb-2"><b>Generate Password</b></label>
 							<div class="input-group">
-								<input type="password" class="form-control" name="password" placeholder="Password">
+								<input type="text" class="form-control" name="password" value="<?= rand_string(8); ?>" placeholder="Password">
 							</div>
-							<label class="mt-3 mb-2"><b>Verifikasi Password</b></label>
-							<div class="input-group">
-								<input type="password" class="form-control" name="rep_password" placeholder="Repeat Password">
-							</div>
-							<button type="submit" name="upload_guru" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
+							<button type="submit" name="upload_guru" class="btn mt-4 mb-3" style="float: right; background-color: #991311; color: white;" >Upload</button>
 						</form>
 					</div>
 				</div>

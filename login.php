@@ -1,13 +1,6 @@
 <?php
 	include 'conn.php';
 	$error = 0;
-
-	// function rand_string( $length ) {
-
-	// 	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	// 	return substr(str_shuffle($chars),0,$length);
-	
-	// }
 	
 	session_start();
 	if(isset($_SESSION["login"]))
@@ -25,26 +18,35 @@
 		$email = $_POST["email"];
 		$password = $_POST["password"];
 		setcookie('user', $email);
-		$result = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' AND password = '$password' AND validated = '1'");
-		$resultt = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' AND password = '$password' AND validated = '0'");
-		$resulttt = mysqli_query($conn, "SELECT * FROM admin WHERE email = '$email' AND password = '$password'");
+		$query_user_validate = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' AND password = '$password' AND validated = '1'");
+		$query_user = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' AND password = '$password' AND validated = '0'");
+		$query_admin = mysqli_query($conn, "SELECT * FROM admin WHERE email = '$email' AND password = '$password'");
+		$query_guru = mysqli_query($conn, "SELECT * FROM guru WHERE email = '$email' AND password = '$password'");
 		
-		if( mysqli_num_rows($result) === 1) 
+		if( mysqli_num_rows($query_user_validate) === 1) 
 		{
 			$_SESSION["login"] = true;
-			$row=mysqli_fetch_assoc( $result );
+			$row=mysqli_fetch_assoc( $query_user_validate );
 			$userid = $row['id_user'];
+			$username = $row['nama_user'];
 			$_SESSION["id"] = $userid;
+			$_SESSION["username"] = $username;
 			header("Location: users/course/kelas.php");
 			exit;
 		}
-		elseif (mysqli_num_rows($resultt) === 1) {
+		elseif (mysqli_num_rows($query_user) === 1) {
 			$error = 1;
 		}
-		elseif (mysqli_num_rows($resulttt) === 1) {
+		elseif (mysqli_num_rows($query_admin) === 1) {
 			$_SESSION["loginadmin"] = true;
 
 			header("Location: admin/admin.php");
+			exit;
+		}
+		elseif (mysqli_num_rows($query_guru) === 1) {
+			$_SESSION["loginguru"] = true;
+
+			header("Location: admin/guru/guru.php");
 			exit;
 		}
 		else

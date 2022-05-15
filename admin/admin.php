@@ -39,16 +39,16 @@
 						<a class="nav-link" href="admin.php"><b>Siswa</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="uploadMateri.php">Materi&emsp;</a>
+						<a class="nav-link" href="mgmt_guru.php">Guru&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="mgmt_guru.php">DaftarGuru&emsp;</a>
+						<a class="nav-link" href="uploadMateri.php">Materi&emsp;</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="dashboard.php">Dashboard Nilai&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="../logout.php">Logout&emsp;</a>
+						<a class="nav-link" href="../logout.php"><span class="iconify-inline" data-icon="carbon:logout"></span></a>
 					</li>
 				</ul>
 			</div>
