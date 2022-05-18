@@ -1,12 +1,43 @@
 <?php
-include '../conn.php';
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../login.php");
-    exit;
-}
-$user = mysqli_query($conn, 'SELECT * FROM user');
-$record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
+
+    include '../conn.php';
+    session_start();
+    if (!isset($_SESSION["login"])) {
+        header("Location: ../login.php");
+        exit;
+    }
+    $user = mysqli_query($conn, 'SELECT * FROM user');
+    $kelas = mysqli_query($conn, 'SELECT * FROM kelas');
+    $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
+
+    function edit($data)
+    {
+        global $conn;
+        $nama = $_POST["uname"];
+        $asal = $_POST["asal"];
+        $email = $_POST["email"];
+        $telepon = $_POST["telepon"];
+        
+        //add to db
+        mysqli_query($conn, "UPDATE user SET nama_user='$nama', asal_sekolah='$asal', email='$email', telepon='$telepon' WHERE id_user = '$_SESSION[id]'");
+
+        return mysqli_affected_rows($conn);
+
+    }
+
+    if( isset($_POST["edit"]) ) 
+    {
+
+        if( edit($_POST) > 0 ) 
+        {
+            header("Location: profile.php");
+        }
+        else
+        {
+            echo mysqli_error($conn);
+        }
+    }
+
 ?>
 
 <!doctype html>
@@ -115,23 +146,67 @@ $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
                         <button type="button" style="float: right; background-color: #991311; color: white;" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <span class="iconify-inline" data-icon="ep:edit"></span>
                         </button>
-                        <div class="modal modal-dialog-scrollable" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <?php foreach ($user as $dataUser) { ?>
+                            <?php if ($dataUser['id_user'] == $_SESSION['id']) { ?>
+                                <?php foreach ($kelas as $dataKelas) { ?>
+                                    <?php if ($dataUser['kelas'] == $dataKelas['nama_kelas']) { ?>
+                                        <?php $getKelasID = $dataKelas['id_kelas']; ?>
+                                    <?php } ?>
+                                <?php } ?>
+                                <form action="" method="post">
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                    <div class="modal-body" style="text-align: justify">
+                                                        <table class="table">
+                                                            <tr>
+                                                                <td>
+                                                                Nama Siswa
+                                                            </td>
+                                                            <td>
+                                                                : &nbsp; <input type="text" style="border: none;" name="uname" value="<?php echo $dataUser['nama_user'] ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Asal Sekolah
+                                                            </td>
+                                                            <td>
+                                                                : &nbsp; <input type="text" style="border: none;" name="asal" value="<?php echo $dataUser['asal_sekolah'] ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Email
+                                                            </td>
+                                                            <td>
+                                                                : &nbsp; <input type="text" style="border: none;" name="email" value="<?php echo $dataUser['email'] ?>">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Telepon
+                                                            </td>
+                                                            <td>
+                                                                : &nbsp; <input type="text" style="border: none;" name="telepon" value="<?php echo $dataUser['telepon'] ?>">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" name="edit" class="btn btn-danger">Update Data</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                </form>
+                            <?php } ?>
+                        <?php } ?>
                         <br>
                         <img class="rounded-circle mx-auto d-block mt-5 mb-4" style="border: 4px solid #5e5e5e;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Breezeicons-actions-22-im-user.svg/512px-Breezeicons-actions-22-im-user.svg.png" width="90">
                         <div class="text-center mt-5 mb-5">
@@ -164,7 +239,7 @@ $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
                                     <div class="input-group">
                                         <select name="coursePHB" class="form-select" id="coursePHB" onchange="findmyvalue()">
                                             <?php 
-                                                $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course GROUP BY nama_course");
+                                                $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
                                                 while ($row = mysqli_fetch_array($sql)) { ?>
                                                 <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
                                             <?php } ?>
@@ -179,7 +254,7 @@ $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
                                 <div class="input-group">
                                     <select name="courseUTS" class="form-select" id="courseUTS">
                                         <?php 
-                                            $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course GROUP BY nama_course");
+                                            $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
                                             while ($row = mysqli_fetch_array($sql)) { ?>
                                             <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
                                         <?php } ?>
@@ -192,7 +267,7 @@ $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
                                 <div class="input-group">
                                     <select name="courseUAS" class="form-select" id="courseUAS" >
                                         <?php 
-                                            $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course GROUP BY nama_course");
+                                            $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
                                             while ($row = mysqli_fetch_array($sql)) { ?>
                                             <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
                                         <?php } ?>
@@ -214,9 +289,9 @@ $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
                                     <div class="input-group">
                                         <select name="courseDataNilai" class="form-select" id="courseDataNilai">
                                             <?php 
-                                                $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course GROUP BY nama_course");
+                                                $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
                                                 while ($row = mysqli_fetch_array($sql)) { ?>
-                                                <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'] . $row['id_course'];?> </option>;
+                                                <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
                                             <?php } ?>
                                         </select>
                                     </div>

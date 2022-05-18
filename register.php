@@ -3,6 +3,67 @@
 	require 'conn.php';
 	session_start();
 
+    $error = 0;
+	function registrasi($data) 
+	{
+		global $conn;
+		$nama_user = $data["nama_user"];
+		$asal_sekolah = $data["asal_sekolah"];
+		$jk = $data["jk"];
+		$email = $data["email"];
+		$telepon = $data["telepon"];
+		$password = $data["password"];
+		// $password = password_hash($password, PASSWORD_DEFAULT);
+		$validated = 0;
+		$find_email = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
+		if( mysqli_fetch_assoc($find_email) )
+		{
+			echo "<script>
+				alert('email sudah terdaftar!');
+			</script>";
+		}
+		else 
+		{
+			$filename = $_FILES['file1']['name'];
+			if($filename != '')
+			{
+				$ext = pathinfo($filename, PATHINFO_EXTENSION);
+				$allowed = ['pdf', 'png', 'jpg', 'jpeg'];
+				if (in_array($ext, $allowed))
+				{
+					$filename = md5(time()).'-'.$filename;
+					$path = 'admin/bukti/kartu_pelajar/';
+					move_uploaded_file($_FILES['file1']['tmp_name'],($path . $filename));
+					$sql = "INSERT INTO user VALUES('', '$nama_user', '$asal_sekolah', '$jk', 'null', '$email', '$telepon', '$password', '$filename', '$validated')";
+					mysqli_query($conn, $sql);
+					return mysqli_affected_rows($conn);
+				}
+				else
+				{
+					echo "<script>
+						alert('File kartu pelajar tidak sesuai kriteria (gunakan pdf, png, jpg, atau jpeg).');
+					</script>";
+				}
+			}
+			else {
+				echo "<script>
+					alert('File kartu pelajar tidak sesuai kriteria!');
+				</script>";	
+			}
+		}
+	}
+
+	if (isset($_POST['submit'])) 
+	{ 
+		if( registrasi($_POST) > 0 ) 
+		{
+			$error = 1;
+		}
+		else {
+			$error = 2;
+		}
+	}
+
 ?>
 
 <!doctype html>
@@ -32,16 +93,10 @@
 			</div>
 
 			<div class="card-text">
-				<!-- <?php if ($error == 2) { ?>
+				<?php if ($error == 2) { ?>
 					<nav aria-label="breadcrumb" style="background-color: #ba8888; border-radius: 5px !important;" class="mb-4 p-2">
 						<ol class="breadcrumb flex">
-							<li class="breadcrumb-item active" aria-current="page" style="color: white">Email telah terdaftar, silahkan daftar kembali</li>
-						</ol>
-					</nav>
-				<?php } elseif ($error == 3) { ?>
-					<nav aria-label="breadcrumb" style="background-color: #ba8888; border-radius: 5px !important;" class="mb-4 p-2">
-						<ol class="breadcrumb flex">
-							<li class="breadcrumb-item active" aria-current="page" style="color: #262626;">Data yang dimasukan tidak sesuai</a></li>
+							<li class="breadcrumb-item active" aria-current="page" style="color: white">Pendaftaran gagal, silahkan <a href="register.php" style="color: red">Daftar</a> kembali</li>
 						</ol>
 					</nav>
 				<?php } elseif ($error == 1) { ?>
@@ -50,9 +105,9 @@
 							<li class="breadcrumb-item active" aria-current="page" style="color: #262626;">Pendaftaran berhasil, silahkan <a href="login.php">Masuk</a></li>
 						</ol>
 					</nav>
-				<?php } ?> -->
+				<?php } ?>
 				
-				<form method="post" action="admin/uploads.php" enctype="multipart/form-data">
+				<form method="post" action="" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label for="nama" class="form-label">Nama</label>
 						<input type="text" name="nama_user" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap">

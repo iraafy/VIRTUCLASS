@@ -54,7 +54,7 @@
 							<span class="iconify" style="font-size: 25px; color: black" data-icon="healthicons:ui-user-profile-outline"></span>
 							</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								<a class="dropdown-item" href="../profil.php">
+								<a class="dropdown-item" href="../profile.php">
 								<?php
 									if(!isset($_SESSION["login"])) {
 										echo "Profil";
@@ -68,7 +68,7 @@
 									echo 
 									"
 									<a class='dropdown-item' href='../../logout.php'>
-										Keluar
+										<span class='iconify-inline' data-icon='carbon:logout'></span>
 									</a>
 									";
 								} else {

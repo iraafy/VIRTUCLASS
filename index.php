@@ -292,12 +292,12 @@
 			<div class="col-lg col-sm-12 space flex">
 				<div class="card shadow" style="border-radius: 10px !important;">
 					<div class="card-body p-3">
-						<img src="assets\img\ahday.jpeg" class="rounded mx-auto d-block mt-4 mb-3" alt="">
+						<img src="assets/img/Ellipse (1).png" class="rounded mx-auto d-block mt-4 mb-3" alt="">
 						<div class="card-body">
 							<h5 class="card-title mb-4" style="text-align: center;">
-								<b>Ahmad Hidayat</b>
+								<b>Lorem Ipsum</b>
 							</h5>
-							<p class="card-text" style="text-align: justify;">Seraf tolong maju seraf, ajarin teman-temannya.</p>
+							<p class="card-text" style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit elementum neque viverra imperdiet in donec.</p>
 						</div>
 					</div>
 				</div>
@@ -306,12 +306,12 @@
 			<div class="col-lg col-sm-12 space flex">
 				<div class="card shadow" style="border-radius: 10px !important;">
 					<div class="card-body p-3">
-						<img src="assets/img/Ellipse (1).png" class="rounded mx-auto d-block mt-4 mb-3" alt="">
+						<img src="assets\img\ahday.jpeg" class="rounded mx-auto d-block mt-4 mb-3" alt="">
 						<div class="card-body">
 							<h5 class="card-title mb-4" style="text-align: center;">
-								<b>Lorem Ipsum</b>
+								<b>Ahmad Hidayat</b>
 							</h5>
-							<p class="card-text" style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit elementum neque viverra imperdiet in donec.</p>
+							<p class="card-text" style="text-align: justify;">Seraf tolong maju seraf, ajarin teman-temannya.</p>
 						</div>
 					</div>
 				</div>
@@ -370,23 +370,23 @@
 					<div class="accordion-body p-5" style="background-color: white !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
 				</div>
 			</div>
-			<div class="accordion-item m-4" style="border: 1px solid lightgrey; border-radius: 10px;">
+			<div class="accordion-item m-3" style="border: 1px solid lightgrey; border-radius: 10px;">
 				<h2 class="accordion-header" id="flush-headingFour">
-				<button class="accordion-button collapsed" style="background-color: white !important;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseThree">
+				<button class="accordion-button collapsed" style="background-color: white !important;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
 					Berapakah biaya yang harus dikeluarkan untuk mengikuti kegiatan belajar di Virtuclass.id?
 				</button>
 				</h2>
-				<div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+				<div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
 					<div class="accordion-body p-5" style="background-color: white !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
 				</div>
 			</div>
-			<div class="accordion-item m-4" style="border: 1px solid lightgrey; border-radius: 10px;">
+			<div class="accordion-item m-3" style="border: 1px solid lightgrey; border-radius: 10px;">
 				<h2 class="accordion-header" id="flush-headingFive">
-				<button class="accordion-button collapsed" style="background-color: white !important;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseThree">
+				<button class="accordion-button collapsed" style="background-color: white !important;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
 					Apa saja syarat dan ketentuan mengikuti program-program Virtuclass?
 				</button>
 				</h2>
-				<div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+				<div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
 					<div class="accordion-body p-5" style="background-color: white !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
 				</div>
 			</div>
