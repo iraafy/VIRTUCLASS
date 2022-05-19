@@ -173,14 +173,14 @@
 			<div class="card-body" style="width: 100%;">
 				<nav>
 					<div class="nav nav-tabs" id="nav-tab" role="tablist">
-						<button class="nav-link active" id="nav-course-tab" data-bs-toggle="tab" data-bs-target="#nav-course" type="button" role="tab" aria-controls="nav-course" aria-selected="false">Upload Course</button>
+						<button class="nav-link active" id="nav-kelas-tab" data-bs-toggle="tab" data-bs-target="#nav-kelas" type="button" role="tab" aria-controls="nav-kelas" aria-selected="true">Upload Kelas</button>
+						<button class="nav-link" id="nav-course-tab" data-bs-toggle="tab" data-bs-target="#nav-course" type="button" role="tab" aria-controls="nav-course" aria-selected="false">Upload Course</button>
 						<button class="nav-link" id="nav-modul-tab" data-bs-toggle="tab" data-bs-target="#nav-modul" type="button" role="tab" aria-controls="nav-modul" aria-selected="false">Upload Modul</button>
 						<button class="nav-link" id="nav-submodul-tab" data-bs-toggle="tab" data-bs-target="#nav-submodul" type="button" role="tab" aria-controls="nav-submodul" aria-selected="false">Upload Sub-Modul</button>
-						<button class="nav-link" id="nav-kelas-tab" data-bs-toggle="tab" data-bs-target="#nav-kelas" type="button" role="tab" aria-controls="nav-kelas" aria-selected="true">Upload Kelas</button>
 					</div>
 				</nav>
 				<div class="tab-content" id="nav-tabContent">
-					<div class="tab-pane fade show active" id="nav-course" role="tabpanel" aria-labelledby="nav-course-tab">
+					<div class="tab-pane fade" id="nav-course" role="tabpanel" aria-labelledby="nav-course-tab">
 						<form action="" method="post">
 							<label class="mt-3 mb-2"><b>Nama Course</b></label>
 							<div class="input-group">
@@ -247,7 +247,7 @@
 							<button type="submit" name="upload_submodul" class="btn mt-4" style="float: right; background-color: #991311; color: white;" >Upload</button>
 						</form>
 					</div>
-					<div class="tab-pane fade" id="nav-kelas" role="tabpanel" aria-labelledby="nav-kelas-tab">
+					<div class="tab-pane fade show active" id="nav-kelas" role="tabpanel" aria-labelledby="nav-kelas-tab">
 						<form action="" method="post">
 							<label class="mt-3 mb-2"><b>Tambah Kelas</b></label>
 							<div class="input-group">

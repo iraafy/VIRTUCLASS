@@ -237,7 +237,7 @@
                                 <label class="mt-3 mb-2" for="selectedCategoryFilter"><b>Course</b></label>
                                 <form action="" method="post">
                                     <div class="input-group">
-                                        <select name="coursePHB" class="form-select" id="coursePHB" onchange="findmyvalue()">
+                                        <select name="coursePHB" class="form-select" id="coursePHB">
                                             <?php 
                                                 $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
                                                 while ($row = mysqli_fetch_array($sql)) { ?>
@@ -265,7 +265,7 @@
                             <div class="tab-pane fade" id="nav-uas" role="tabpanel" aria-labelledby="nav-uas-tab">
                                 <label class="mt-3 mb-2" for="selectedCategoryFilter"><b>Mata Pelajaran</b></label>
                                 <div class="input-group">
-                                    <select name="courseUAS" class="form-select" id="courseUAS" >
+                                    <select name="courseUAS" class="form-select" id="courseUAS" onchange="findmyvalue()">
                                         <?php 
                                             $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
                                             while ($row = mysqli_fetch_array($sql)) { ?>

@@ -147,7 +147,6 @@
 				</thead>
 				<tbody style="text-align:center">
 					<?php $no = 1; ?>
-					<?php if (is_array($list_guru)){ ?>
 						<?php foreach ($list_guru as $list) { ?>
 							<tr>
 								<td>
@@ -163,13 +162,10 @@
 									<?=$list['password']?>
 								</td>
 								<td>
-									<a href="detail.php?id_user=" class="btn btn-outline-success"><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: green;"></span></a>
-									&nbsp;
 									<a href="detail.php?id_user=" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
 								</td>
 							</tr>
 						<?php $no++ ?>
-						<?php } ?>
 					<?php } ?>
 				</tbody>
 			</table>

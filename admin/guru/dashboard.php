@@ -58,8 +58,8 @@
 				<div class="tab-content" id="nav-tabContent">
 					<div class="tab-pane fade show active" id="nav-grafik" role="tabpanel" aria-labelledby="nav-grafik-tab">
 						<div class="row">
-							<label class="mt-3 mb-3" for="selectedCategoryFilter"><b>Urutkan Berdasarkan</b></label>
-							<div class="col-3">
+							<label class="mt-3 mb-3 text-center" for="selectedCategoryFilter"><b>Data rata rata nilai</b></label>
+							<!-- <div class="col-3">
 								<div class="input-group">
 									<select class="form-select" id="selectedCategoryFilter">
 										<option value="1">Semua Siswa</option>
@@ -93,7 +93,7 @@
 										<option value="4">2022</option>
 									</select>
 								</div>
-							</div>
+							</div> -->
 						</div>
 						<div>
 							<canvas class="mt-4" id="chart" style="width:100%;"></canvas>
@@ -108,8 +108,25 @@
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 	<script>
-        var xValues = ["SEM-1","SEM-2","SEM-3","SEM-4","SEM-5","SEM-6"];
-        var yValues = [83,89,82,68,84,85,69];
+		<?php  
+            $nilai = array(); 
+            $nilai_sql = mysqli_query($conn, "SELECT AVG(nilai) avg_nilai FROM record_siswa GROUP BY tanggal ORDER BY tanggal ASC");
+            $nilai = mysqli_fetch_all($nilai_sql);
+
+            $tanggal = array(); 
+            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa GROUP BY tanggal ORDER BY tanggal ASC");
+            $tanggal = mysqli_fetch_all($tanggal_sql);
+        ?>
+
+        var data_tanggal = [ <?= json_encode($tanggal); ?> ];  
+        for (i = 0; i < data_tanggal.length; i++) {
+            xValues = data_tanggal[i];
+        }
+
+        var data_nilai = [ <?= json_encode($nilai); ?> ];  
+        for (j = 0; j < data_nilai.length; j++) {
+            yValues = data_nilai[j];      
+        }
 
         new Chart("chart", {
         type: "line",
