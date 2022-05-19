@@ -69,7 +69,7 @@
 						<a class="nav-link" href="Dashboard.php">Dashboard Nilai&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="Logout.php"><span class="iconify-inline" data-icon="carbon:logout"></span></a>
+						<a class="nav-link" href="../logout.php"><span class="iconify-inline" data-icon="carbon:logout"></span></a>
 					</li>
 				</ul>
 			</div>
@@ -147,27 +147,29 @@
 				</thead>
 				<tbody style="text-align:center">
 					<?php $no = 1; ?>
-					<?php foreach ($list_guru as $list) { ?>
-						<tr>
-							<td>
-								<?=$no;?>
-							</td>
-							<td>
-								<?=$list['nama']?>
-							</td>
-							<td>
-								<?=$list['email']?>
-							</td>
-							<td>
-								<?=$list['password']?>
-							</td>
-							<td>
-								<a href="detail.php?id_user=" class="btn btn-outline-success"><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: green;"></span></a>
-								&nbsp;
-								<a href="detail.php?id_user=" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
-							</td>
-						</tr>
-					<?php $no++ ?>
+					<?php if (is_array($list_guru)){ ?>
+						<?php foreach ($list_guru as $list) { ?>
+							<tr>
+								<td>
+									<?=$no;?>
+								</td>
+								<td>
+									<?=$list['nama']?>
+								</td>
+								<td>
+									<?=$list['email']?>
+								</td>
+								<td>
+									<?=$list['password']?>
+								</td>
+								<td>
+									<a href="detail.php?id_user=" class="btn btn-outline-success"><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: green;"></span></a>
+									&nbsp;
+									<a href="detail.php?id_user=" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
+								</td>
+							</tr>
+						<?php $no++ ?>
+						<?php } ?>
 					<?php } ?>
 				</tbody>
 			</table>

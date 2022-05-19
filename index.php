@@ -179,8 +179,8 @@
 						<img src="assets/img/bro.png" class="pict" alt="">
 					</div>
 					<div class="cardBottom spaceContent">
-						<h6 style="font-weight: 700;" class="mb-3">Ahmad Hidayat</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<center><h6 style="font-weight: 700;" class="mb-3">Pembelajaran Gratis</h6></center>
+						<center><p>Virtuclass menyediakan pembelajaran yang tidak dikenakan biaya apapun.</p></center>
 					</div>
 				</div>
 			</div>
@@ -190,8 +190,8 @@
 						<img src="assets/img/bro2.png" class="pict" alt="">
 					</div>
 					<div class="cardBottom spaceContent">
-						<h6 style="font-weight: 700;" class="mb-3">Lorem Ipsum</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<center><h6 style="font-weight: 700;" class="mb-3">BFA (Belajar From Anywhere)</h6></center>
+						<center><p>Pembelajaran berbasis daring sehingga kegiatan belajar tetap dapat terlaksana darimanapun.</p></center>	
 					</div>
 				</div>
 			</div>
@@ -201,8 +201,8 @@
 						<img src="assets/img/rafiki.png" class="pict" alt="">
 					</div>
 					<div class="cardBottom spaceContent">
-						<h6 style="font-weight: 700;" class="mb-3">Lorem Ipsum</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<center><h6 style="font-weight: 700;" class="mb-3">Konseling di luar jam belajar</h6></center>
+						<center><p>Mentor Virtuclass bisa menjawab pertanyaan teman belajar di luar jam belajar.</p></center>
 					</div>
 				</div>
 			</div>
@@ -212,8 +212,8 @@
 						<img src="assets/img/cuate2.png" class="pict" alt="">
 					</div>
 					<div class="cardBottom spaceContent">
-						<h6 style="font-weight: 700;" class="mb-3">Lorem Ipsum</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						<center><h6 style="font-weight: 700;" class="mb-3">Pembelajaran yang interaktif</h6></center>
+						<center><p>Virtuclass mengajarkan konsep sains dengan contoh penerapan di kehidupan.</p></center>
 					</div>
 				</div>
 			</div>
@@ -292,12 +292,15 @@
 			<div class="col-lg col-sm-12 space flex">
 				<div class="card shadow" style="border-radius: 10px !important;">
 					<div class="card-body p-3">
-						<img src="assets/img/Ellipse (1).png" class="rounded mx-auto d-block mt-4 mb-3" alt="">
+						<img src="assets\img\testi_satu.png" class="rounded mx-auto d-block mt-4 mb-3" alt="">
 						<div class="card-body">
 							<h5 class="card-title mb-4" style="text-align: center;">
-								<b>Lorem Ipsum</b>
+								<b>Chesta Adabi Karnen</b>
 							</h5>
-							<p class="card-text" style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit elementum neque viverra imperdiet in donec.</p>
+							<p class="card-text" style="text-align: justify;">Kalo dari saya sangat membantu ka soalnya saya kurang bisa belajar sendiri. 
+							Jadi dengan adanya virtuclass saya jadi bisa belajar bareng dan itu membuat saya mudah memahami. 
+							Selain itu juga virtuclass tidak hanya menerangkan materi yang biasa tapi dari dasar materi tersebut sampai materinya selesai. 
+							Pokoknya enak deh belajar di virtuclass.</p>
 						</div>
 					</div>
 				</div>
@@ -347,7 +350,7 @@
 				</button>
 				</h2>
 				<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-					<div class="accordion-body p-5" style="background-color: white !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+					<div class="accordion-body p-5" style="background-color: white !important;">Syarat pertama, sekolah kamu harus sudah bekerja sama dengan kami terlebih dahulu. Kemudian, kalian bisa mendaftar langsung di website kami.</div>
 				</div>
 			</div>
 			<div class="accordion-item m-3" style="border: 1px solid lightgrey; border-radius: 10px;">
@@ -357,7 +360,7 @@
 				</button>
 				</h2>
 				<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-					<div class="accordion-body p-5" style="background-color: white !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+					<div class="accordion-body p-5" style="background-color: white !important;">Sejauh ini kami baru menyiapkan kelas fisika, kimia, matematika, dan bahasa inggris.</div>
 				</div>
 			</div>
 			<div class="accordion-item m-3" style="border: 1px solid lightgrey; border-radius: 10px;">
@@ -367,7 +370,7 @@
 				</button>
 				</h2>
 				<div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-					<div class="accordion-body p-5" style="background-color: white !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+					<div class="accordion-body p-5" style="background-color: white !important;">Sistem pembelajaran virtuclass dilakukan secara daring (<i>online</i>) menggunakan media google meet atau zoom dengan materi belajar yang diintegrasikan menggunakan website virtuclass.</div>
 				</div>
 			</div>
 			<div class="accordion-item m-3" style="border: 1px solid lightgrey; border-radius: 10px;">
@@ -376,8 +379,8 @@
 					Berapakah biaya yang harus dikeluarkan untuk mengikuti kegiatan belajar di Virtuclass.id?
 				</button>
 				</h2>
-				<div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-					<div class="accordion-body p-5" style="background-color: white !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+				<div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body p-5" style="background-color: white !important;">Gratis.</div>
 				</div>
 			</div>
 			<div class="accordion-item m-3" style="border: 1px solid lightgrey; border-radius: 10px;">
@@ -386,8 +389,14 @@
 					Apa saja syarat dan ketentuan mengikuti program-program Virtuclass?
 				</button>
 				</h2>
-				<div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-					<div class="accordion-body p-5" style="background-color: white !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+				<div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body p-5" style="background-color: white !important;">
+						<ul>
+							<li>Kamu termasuk murid dari sekolah yang bekerja sama dengan Virtuclass.id.</li>
+							<li>Kamu memiliki niat belajar yang tinggi.</li>
+							<li>Mengisi form pendaftaran.</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

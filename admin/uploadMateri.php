@@ -107,7 +107,7 @@
 						<a class="nav-link" href="Dashboard.php">Dashboard Nilai&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="Logout.php"><span class="iconify-inline" data-icon="carbon:logout"></span></a>
+						<a class="nav-link" href="../logout.php"><span class="iconify-inline" data-icon="carbon:logout"></span></a>
 					</li>
 				</ul>
 			</div>
