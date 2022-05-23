@@ -7,7 +7,7 @@
 	$kelas = mysqli_query($conn, 'SELECT * FROM kelas');
 	$kelas_course = mysqli_query($conn, 'select id_course, nama_course, nama_kelas from course a join kelas b on a.id_kelas = b.id_kelas;');
 	$data_modul = mysqli_query($conn, 'select id_modul, nama_modul, nama_course, nama_kelas from course a join modul b on a.id_course = b.id_course join kelas c on a.id_kelas = c.id_kelas;');	
-	$list_data = mysqli_query($conn, 'select judul_content, content, nama_modul, nama_course, nama_kelas from submodul a join modul b on a.id_modul = b.id_modul join course c on b.id_course = c.id_course join kelas d on c.id_kelas = d.id_kelas;');
+	$list_data = mysqli_query($conn, 'select judul_content, content, nama_modul, nama_course, nama_kelas, id_submodul from submodul a join modul b on a.id_modul = b.id_modul join course c on b.id_course = c.id_course join kelas d on c.id_kelas = d.id_kelas;');
 
 	if( isset($_POST["upload_course"]) ) 
 	{
@@ -75,17 +75,18 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<link rel="stylesheet" href="../../assets/css/style.css">
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<title>VirtuClass</title>
-	<link rel="stylesheet" href="../../assets/css/style.css">
 
 </head>
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
-			<a class="navbar-brand" href="guru.php">
+			<a class="navbar-brand" href="#">
                 <img src="../../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
             </a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +98,7 @@
 						<a class="nav-link" href="uploadMateri.php"><b>Materi</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="dashboard.php">Dashboard Nilai&emsp;</a>
+						<a class="nav-link" href="Dashboard.php">Dashboard Nilai&emsp;</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="../../logout.php"><span class="iconify-inline" data-icon="carbon:logout"></span></a>
@@ -305,7 +306,7 @@
 							<td>
 								<a href="detail.php?id_user=" class="btn btn-outline-success"><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: green;"></span></a>
 								&nbsp;
-								<a href="detail.php?id_user=" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
+								<a href="hapus_modul.php?id_submodul=<?= $list['id_submodul']; ?>" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
 							</td>
 						</tr>
 					<?php $no++ ?>

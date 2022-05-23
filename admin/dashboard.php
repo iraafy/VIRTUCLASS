@@ -21,7 +21,7 @@
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
-			<a class="navbar-brand" href="guru.php">
+			<a class="navbar-brand" href="#">
                 <img src="../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
             </a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,11 +29,17 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+						<a class="nav-link" href="admin.php">Siswa&emsp;</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="mgmt_guru.php">Guru&emsp;</a>
+					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="uploadMateri.php">Materi&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="dashboard.php"><b>Dashboard Nilai</b>&emsp;</a>
+						<a class="nav-link" href="Dashboard.php"><b>Dashboard Nilai</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="../logout.php"><span class="iconify-inline" data-icon="carbon:logout"></span></a>
@@ -191,7 +197,7 @@
 																				<?php echo $dataUserr['nilai'] ?>
 																			</td>
 																			<td>
-																				<a href="detail_kartu.php?bukti=<?php echo $dataUserr['bukti_nilai'] ?>" class="link-preview" target="_blank" rel="nofollow">
+																				<a href="detail_nilai.php?bukti=<?php echo $dataUserr['bukti_nilai'] ?>" class="link-preview" target="_blank" rel="nofollow">
 																					<?php echo $dataUserr['bukti_nilai'] ?>
 																				</a>
 																			</td>
