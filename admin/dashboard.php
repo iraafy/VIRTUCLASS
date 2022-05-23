@@ -100,7 +100,114 @@
 						</div>
 					</div>
 					<div class="tab-pane fade" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
-						
+						<br><br>
+						<table class="table" style="text-align: center;">
+							<thead>
+								<tr>
+									<th>
+										Nama
+									</th>
+									<th>
+										Asal Sekolah
+									</th>
+									<th>
+										Kelas
+									</th>
+									<th>
+										Email
+									</th>
+									<th>
+										Telepon
+									</th>
+									<th>
+										OPSI 
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php $sql = mysqli_query($conn, "SELECT * FROM user a JOIN record_siswa b ON a.id_user = b.id_user GROUP BY nama_user ASC"); ?>
+								<?php foreach ($sql as $dataUser) { ?>
+									<tr>
+										<td>
+											<?= $dataUser['nama_user']; ?>
+										</td>
+										<td>
+											<?= $dataUser['asal_sekolah']; ?>
+										</td>
+										<td>
+											<?= $dataUser['kelas']; ?>
+										</td>
+										<td>
+											<?= $dataUser['email']; ?>
+										</td>
+										<td>
+											<?= $dataUser['telepon']; ?>
+										</td>
+										<td>
+											<a href="detail.php?id_user=<?php echo $dataUser['id_user']; ?>" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal-<?php echo $dataUser['id_user']; ?>">Detail</a>
+											<!-- Modal -->
+											<div class="modal fade" id="exampleModal-<?php echo $dataUser['id_user']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-xl">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel">Detail Info</h5>
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body" style="text-align: justify">
+															<table class="table" style="text-align: center;">
+																<thead>
+																	<tr>
+																		<th>
+																			Tanggal
+																		</th>
+																		<th>
+																			Kategori Nilai
+																		</th>
+																		<th>
+																			Course
+																		</th>
+																		<th>
+																			Nilai
+																		</th>
+																		<th>
+																			Bukti Nilai
+																		</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<?php $sqll = mysqli_query($conn, "SELECT * FROM record_siswa a JOIN course b ON a.id_course = b.id_course WHERE id_user = $dataUser[id_user]") ?>
+																	<?php foreach ($sqll as $dataUserr) { ?>
+																		<tr>
+																			<td>
+																				<?php echo $dataUserr['tanggal'] ?>
+																			</td>
+																			<td>
+																				<?php echo $dataUserr['kategori_nilai'] ?>
+																			</td>
+																			<td>
+																				<?php echo $dataUserr['nama_course'] ?>
+																			</td>
+																			<td>
+																				<?php echo $dataUserr['nilai'] ?>
+																			</td>
+																			<td>
+																				<a href="detail_kartu.php?bukti=<?php echo $dataUserr['bukti_nilai'] ?>" class="link-preview" target="_blank" rel="nofollow">
+																					<?php echo $dataUserr['bukti_nilai'] ?>
+																				</a>
+																			</td>
+																		</tr>
+																	<?php } ?>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

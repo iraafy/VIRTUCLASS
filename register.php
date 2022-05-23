@@ -150,7 +150,7 @@
 
 					<label for="kartupelajar" class="mb-2">Kartu Pelajar</label>
 					<div class="input-group">
-						<input input type="file" name="file1" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+						<input type="file" name="file1" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 					</div>
 
 					<div class="d-grid mb-1 mt-5">

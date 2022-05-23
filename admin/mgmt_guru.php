@@ -162,7 +162,7 @@
 									<?=$list['password']?>
 								</td>
 								<td>
-									<a href="detail.php?id_user=" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
+									<a href="hapus_guru.php?id_guru=<?php echo $list['id_guru']; ?>" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
 								</td>
 							</tr>
 						<?php $no++ ?>

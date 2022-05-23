@@ -6,6 +6,7 @@
         header("Location: ../login.php");
         exit;
     }
+    $error = 0;
     $user = mysqli_query($conn, 'SELECT * FROM user');
     $kelas = mysqli_query($conn, 'SELECT * FROM kelas');
     $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
@@ -37,6 +38,58 @@
             echo mysqli_error($conn);
         }
     }
+
+    function upload_nilai($data) 
+	{
+		global $conn;
+		$tgl = date('Y/m/d');
+		$nilai = $data["nilai"];
+		$kategori_nilai = $data["kategori_nilai"];
+		$id_user = $_SESSION["id"];
+		$id_course = $data["courseDataNilai"];
+        $filename = $_FILES['file1']['name'];
+
+        if($filename != '')
+        {
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            $allowed = ['pdf', 'png', 'jpg', 'jpeg'];
+            if (in_array($ext, $allowed))
+            {
+                $filename = md5(time()).'-'.$_SESSION['username'].'-'.$filename;
+                $path = '../admin/bukti/nilai/';
+                move_uploaded_file($_FILES['file1']['tmp_name'],($path . $filename));
+                $sql = "INSERT INTO record_siswa VALUES('', '$tgl', '$nilai', '$kategori_nilai', '$id_user', '$id_course', '$filename')";
+                mysqli_query($conn, $sql);
+                return mysqli_affected_rows($conn);
+            }
+            else
+            {
+                echo "<script>
+                    alert('File nilai tidak sesuai kriteria (gunakan pdf, png, jpg, atau jpeg).');
+                </script>";
+            }
+        }
+        else {
+            echo "<script>
+                alert('File nilai tidak sesuai kriteria!');
+            </script>";	
+        }
+	}
+
+	if (isset($_POST['upload_nilai'])) 
+	{ 
+		if( upload_nilai($_POST) > 0 ) 
+		{
+			echo "<script>
+                    alert('Upload Nilai Berhasil');
+                </script>";
+		}
+		else {
+			echo "<script>
+                    alert('Upload Nilai Gagal');
+                </script>";
+		}
+	}
 
 ?>
 
@@ -224,7 +277,7 @@
             <div class="col-lg-8 col-md-8 col-sm-12 col-12 border-right p-3">
                 <div class="card" style="box-shadow: 2px 2px 10px 1px rgba(0,0,0,0.30);">
                     <div class="card-body" style="width: 100%;">
-                        <nav>
+                        <!-- <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <button class="nav-link active" id="nav-phb-tab" data-bs-toggle="tab" data-bs-target="#nav-phb" type="button" role="tab" aria-controls="nav-phb" aria-selected="true">PHB</button>
                                 <button class="nav-link" id="nav-uts-tab" data-bs-toggle="tab" data-bs-target="#nav-uts" type="button" role="tab" aria-controls="nav-uts" aria-selected="false">UTS</button>
@@ -276,37 +329,50 @@
                                 <canvas class="mt-4" id="chartUAS" style="width:100%; max-width:600px"></canvas>
                             </div>
                             <div class="tab-pane fade" id="nav-upload" role="tabpanel" aria-labelledby="nav-upload-tab">
-                                <form action="" method="post">
-                                    <label class="mt-3 mb-2" for="inputGroupSelect01"><b>Kategori Nilai</b></label>
-                                    <div class="input-group">
-                                        <select class="form-select" id="inputGroupSelect01">
-                                            <option value="PHB">PHB</option>
-                                            <option value="UTS">UTS</option>
-                                            <option value="UAS">UAS</option>
-                                        </select>
-                                    </div>
-                                    <label class="mt-3 mb-2" for="inputGroupSelect01"><b>Course</b></label>
-                                    <div class="input-group">
-                                        <select name="courseDataNilai" class="form-select" id="courseDataNilai">
-                                            <?php 
-                                                $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
-                                                while ($row = mysqli_fetch_array($sql)) { ?>
-                                                <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                    <label class="mt-3 mb-2"><b>Nilai</b></label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="nilai" placeholder="Masukan nilai">
-                                    </div>
-                                    <label class="mt-3 mb-2"><b>Bukti</b></label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
-                                    </div>
-                                    <button type="submit" class="btn mt-4" style="float: right; background-color: #991311; color: white;">Upload</button>
-                                </form>
-                            </div>
+                            <?php if ($error == 2) { ?>
+                                <nav aria-label="breadcrumb" style="background-color: #ba8888; border-radius: 5px !important;" class="mb-4 p-2">
+                                    <ol class="breadcrumb flex">
+                                        <li class="breadcrumb-item active" aria-current="page" style="color: white">Upload nilai gagal, silahkan upload kembali</li>
+                                    </ol>
+                                </nav>
+                            <?php } elseif ($error == 1) { ?>
+                                <nav aria-label="breadcrumb" style="background-color: #97cc9b; border-radius: 5px !important;" class="mb-4 p-2">
+                                    <ol class="breadcrumb flex">
+                                        <li class="breadcrumb-item active" aria-current="page" style="color: #262626;">Upload nilai berhasil</li>
+                                    </ol>
+                                </nav>
+                            <?php } ?>
                         </div>
+                    </div> -->
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <label class="mt-3 mb-2" for="inputGroupSelect01"><b>Kategori Nilai</b></label>
+                        <div class="input-group">
+                            <select class="form-select" id="inputGroupSelect01" name="kategori_nilai">
+                                <option value="PHB">PHB</option>
+                                <option value="UTS">UTS</option>
+                                <option value="UAS">UAS</option>
+                            </select>
+                        </div>
+                        <label class="mt-3 mb-2" for="inputGroupSelect01"><b>Course</b></label>
+                        <div class="input-group">
+                            <select name="courseDataNilai" class="form-select" id="courseDataNilai">
+                                <?php 
+                                    $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
+                                    while ($row = mysqli_fetch_array($sql)) { ?>
+                                    <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <label class="mt-3 mb-2"><b>Nilai</b></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="nilai" placeholder="Masukan nilai">
+                        </div>
+                        <label class="mt-3 mb-2"><b>Bukti</b></label>
+                        <div class="input-group">
+                            <input type="file" name="file1" class="form-control" id="inputGroupFile02">
+                        </div>
+                        <button type="submit" name="upload_nilai" class="btn mt-4" style="float: right; background-color: #991311; color: white;">Upload Nilai</button>
+                    </form>
                     </div>
                 </div>
             </div>
@@ -318,12 +384,6 @@
     <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        function findmyvalue()
-        {
-            myval = document.getElementById("courseUAS").value;
-        }
-    </script>
     <script>
         var myModal = document.getElementById('myModal')
         var myInput = document.getElementById('myInput')
@@ -331,6 +391,12 @@
         myModal.addEventListener('shown.bs.modal', function() {
             myInput.focus()
         })
+    </script>
+    <!-- <script type="text/javascript">
+        function findmyvalue()
+        {
+            myval = document.getElementById("courseUAS").value;
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script>
@@ -476,7 +542,7 @@
                 }
             }
         });
-    </script>
+    </script> -->
 </body>
 
 </html>

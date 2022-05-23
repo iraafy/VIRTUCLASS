@@ -179,8 +179,8 @@
 						<img src="assets/img/bro.png" class="pict" alt="">
 					</div>
 					<div class="cardBottom spaceContent">
-						<center><h6 style="font-weight: 700;" class="mb-3">Pembelajaran Gratis</h6></center>
-						<center><p>Virtuclass menyediakan pembelajaran yang tidak dikenakan biaya apapun.</p></center>
+						<center><h6 style="font-weight: 700;" class="mb-3">Pembelajaran <br> Gratis</h6></center>
+						<center><p style="font-size: 13px;">Virtuclass menyediakan pembelajaran yang tidak dikenakan biaya apapun.</p></center>
 					</div>
 				</div>
 			</div>
@@ -190,8 +190,8 @@
 						<img src="assets/img/bro2.png" class="pict" alt="">
 					</div>
 					<div class="cardBottom spaceContent">
-						<center><h6 style="font-weight: 700;" class="mb-3">BFA (Belajar From Anywhere)</h6></center>
-						<center><p>Pembelajaran berbasis daring sehingga kegiatan belajar tetap dapat terlaksana darimanapun.</p></center>	
+						<center><h6 style="font-weight: 700;" class="mb-3">BFA <br> (Belajar From Anywhere)</h6></center>
+						<center><p style="font-size: 13px;">Pembelajaran berbasis daring sehingga kegiatan belajar tetap dapat terlaksana darimanapun.</p></center>	
 					</div>
 				</div>
 			</div>
@@ -202,7 +202,7 @@
 					</div>
 					<div class="cardBottom spaceContent">
 						<center><h6 style="font-weight: 700;" class="mb-3">Konseling di luar jam belajar</h6></center>
-						<center><p>Mentor Virtuclass bisa menjawab pertanyaan teman belajar di luar jam belajar.</p></center>
+						<center><p style="font-size: 13px;">Mentor Virtuclass bisa menjawab pertanyaan teman belajar di luar jam belajar.</p></center>
 					</div>
 				</div>
 			</div>
@@ -213,7 +213,7 @@
 					</div>
 					<div class="cardBottom spaceContent">
 						<center><h6 style="font-weight: 700;" class="mb-3">Pembelajaran yang interaktif</h6></center>
-						<center><p>Virtuclass mengajarkan konsep sains dengan contoh penerapan di kehidupan.</p></center>
+						<center><p style="font-size: 13px;">Virtuclass mengajarkan konsep sains dengan contoh penerapan di kehidupan.</p></center>
 					</div>
 				</div>
 			</div>
@@ -323,12 +323,15 @@
 			<div class="col-lg col-sm-12 space flex">
 				<div class="card shadow" style="border-radius: 10px !important;">
 					<div class="card-body p-3">
-						<img src="assets/img/Ellipse (2).png" class="rounded mx-auto d-block mt-4 mb-3" alt="">
+						<img src="assets\img\testi_satu.png" class="rounded mx-auto d-block mt-4 mb-3" alt="">
 						<div class="card-body">
 							<h5 class="card-title mb-4" style="text-align: center;">
-								<b>Lorem Ipsum</b>
+								<b>Chesta Adabi Karnen</b>
 							</h5>
-							<p class="card-text" style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit elementum neque viverra imperdiet in donec.</p>
+							<p class="card-text" style="text-align: justify;">Kalo dari saya sangat membantu ka soalnya saya kurang bisa belajar sendiri. 
+							Jadi dengan adanya virtuclass saya jadi bisa belajar bareng dan itu membuat saya mudah memahami. 
+							Selain itu juga virtuclass tidak hanya menerangkan materi yang biasa tapi dari dasar materi tersebut sampai materinya selesai. 
+							Pokoknya enak deh belajar di virtuclass.</p>
 						</div>
 					</div>
 				</div>
@@ -418,24 +421,16 @@
 				</p>
 				<div class="row">
 					<div class="col-lg-3 col-md-3 col-sm-6 col-6">
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">Home</a> <br>
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">About</a> <br>
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">Course</a> <br>
+						<a href="index.php" style="text-decoration: none; color: black; font-size: 14px">Home</a> <br>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-6 col-6">
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">Home</a> <br>
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">About</a> <br>
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">Course</a> <br>
+						<a href="#about" style="text-decoration: none; color: black; font-size: 14px">About</a> <br>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-6 col-6">
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">Home</a> <br>
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">About</a> <br>
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">Course</a> <br>
+						<a href="users/course/kelas.php" style="text-decoration: none; color: black; font-size: 14px">Course</a> <br>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-6 col-6">
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">Home</a> <br>
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">About</a> <br>
-						<a href="#" style="text-decoration: none; color: black; font-size: 14px">Course</a> <br>
+						<a href="#faq" style="text-decoration: none; color: black; font-size: 14px">FAQ</a> <br>
 					</div>
 				</div>
 			</div>
@@ -445,7 +440,7 @@
 				<p class="pb-2" style="color: #901311; font-weight: bold;">
 					Our Social Media
 				</p>
-				<span class="iconify" style="font-size: 20px" data-icon="akar-icons:instagram-fill"></span> &nbsp; @virtuclass
+				<span class="iconify" style="font-size: 20px" data-icon="akar-icons:instagram-fill"></span> &nbsp; <a href="https://www.instagram.com/virtuclass.id/" target="_blank" style="color: black;" rel="noopener noreferrer">@virtuclass</a>
 			</div>
 		</div>
 		<div class="fooooter">

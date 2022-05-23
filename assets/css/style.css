@@ -30,7 +30,6 @@ body{
 
 a.link-preview {
   display: inline-block;
-  border: 1px dotted black;
   padding: 5px;
 }
 
@@ -56,7 +55,7 @@ a.link-preview {
 .cardBottom {
   width: 100%;
   background-color: #F2E5CC;
-  height: 125px;
+  height: 150px;
   border-bottom-right-radius: 20px;	
   border-bottom-left-radius: 20px;
 }

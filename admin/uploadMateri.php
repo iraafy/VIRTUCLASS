@@ -7,7 +7,7 @@
 	$kelas = mysqli_query($conn, 'SELECT * FROM kelas');
 	$kelas_course = mysqli_query($conn, 'select id_course, nama_course, nama_kelas from course a join kelas b on a.id_kelas = b.id_kelas;');
 	$data_modul = mysqli_query($conn, 'select id_modul, nama_modul, nama_course, nama_kelas from course a join modul b on a.id_course = b.id_course join kelas c on a.id_kelas = c.id_kelas;');	
-	$list_data = mysqli_query($conn, 'select judul_content, content, nama_modul, nama_course, nama_kelas from submodul a join modul b on a.id_modul = b.id_modul join course c on b.id_course = c.id_course join kelas d on c.id_kelas = d.id_kelas;');
+	$list_data = mysqli_query($conn, 'select judul_content, content, nama_modul, nama_course, nama_kelas, id_submodul from submodul a join modul b on a.id_modul = b.id_modul join course c on b.id_course = c.id_course join kelas d on c.id_kelas = d.id_kelas;');
 
 	if( isset($_POST["upload_course"]) ) 
 	{
@@ -312,7 +312,7 @@
 							<td>
 								<a href="detail.php?id_user=" class="btn btn-outline-success"><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: green;"></span></a>
 								&nbsp;
-								<a href="detail.php?id_user=" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
+								<a href="hapus_modul.php?id_submodul=<?= $list['id_submodul']; ?>" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
 							</td>
 						</tr>
 					<?php $no++ ?>
