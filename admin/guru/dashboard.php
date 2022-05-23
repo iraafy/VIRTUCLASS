@@ -125,28 +125,28 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php $sql = mysqli_query($conn, "SELECT * FROM user a JOIN record_siswa b ON a.id_user = b.id_user GROUP BY nama_user ASC"); ?>
-								<?php foreach ($sql as $dataUser) { ?>
+								<?php $sql = mysqli_query($conn, "SELECT * FROM siswa a JOIN record_siswa b ON a.id_siswa = b.id_siswa GROUP BY nama_siswa ASC"); ?>
+								<?php foreach ($sql as $datasiswa) { ?>
 									<tr>
 										<td>
-											<?= $dataUser['nama_user']; ?>
+											<?= $datasiswa['nama_siswa']; ?>
 										</td>
 										<td>
-											<?= $dataUser['asal_sekolah']; ?>
+											<?= $datasiswa['asal_sekolah']; ?>
 										</td>
 										<td>
-											<?= $dataUser['kelas']; ?>
+											<?= $datasiswa['kelas']; ?>
 										</td>
 										<td>
-											<?= $dataUser['email']; ?>
+											<?= $datasiswa['email']; ?>
 										</td>
 										<td>
-											<?= $dataUser['telepon']; ?>
+											<?= $datasiswa['telepon']; ?>
 										</td>
 										<td>
-											<a href="detail.php?id_user=<?php echo $dataUser['id_user']; ?>" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal-<?php echo $dataUser['id_user']; ?>">Detail</a>
+											<a href="detail.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal-<?php echo $datasiswa['id_siswa']; ?>">Detail</a>
 											<!-- Modal -->
-											<div class="modal fade" id="exampleModal-<?php echo $dataUser['id_user']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal fade" id="exampleModal-<?php echo $datasiswa['id_siswa']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												<div class="modal-dialog modal-xl">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -175,24 +175,24 @@
 																	</tr>
 																</thead>
 																<tbody>
-																	<?php $sqll = mysqli_query($conn, "SELECT * FROM record_siswa a JOIN course b ON a.id_course = b.id_course WHERE id_user = $dataUser[id_user]") ?>
-																	<?php foreach ($sqll as $dataUserr) { ?>
+																	<?php $sqll = mysqli_query($conn, "SELECT * FROM record_siswa a JOIN course b ON a.id_course = b.id_course WHERE id_siswa = $datasiswa[id_siswa]") ?>
+																	<?php foreach ($sqll as $datasiswaa) { ?>
 																		<tr>
 																			<td>
-																				<?php echo $dataUserr['tanggal'] ?>
+																				<?php echo $datasiswaa['tanggal'] ?>
 																			</td>
 																			<td>
-																				<?php echo $dataUserr['kategori_nilai'] ?>
+																				<?php echo $datasiswaa['kategori_nilai'] ?>
 																			</td>
 																			<td>
-																				<?php echo $dataUserr['nama_course'] ?>
+																				<?php echo $datasiswaa['nama_course'] ?>
 																			</td>
 																			<td>
-																				<?php echo $dataUserr['nilai'] ?>
+																				<?php echo $datasiswaa['nilai'] ?>
 																			</td>
 																			<td>
-																				<a href="detail_nilai.php?bukti=<?php echo $dataUserr['bukti_nilai'] ?>" class="link-preview" target="_blank" rel="nofollow">
-																					<?php echo $dataUserr['bukti_nilai'] ?>
+																				<a href="detail_nilai.php?bukti=<?php echo $datasiswaa['bukti_nilai'] ?>" class="link-preview" target="_blank" rel="nofollow">
+																					<?php echo $datasiswaa['bukti_nilai'] ?>
 																				</a>
 																			</td>
 																		</tr>

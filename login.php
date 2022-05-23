@@ -17,24 +17,24 @@
 	{
 		$email = $_POST["email"];
 		$password = $_POST["password"];
-		setcookie('user', $email);
-		$query_user_validate = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' AND password = '$password' AND validated = '1'");
-		$query_user = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email' AND password = '$password' AND validated = '0'");
+		setcookie('siswa', $email);
+		$query_siswa_validate = mysqli_query($conn, "SELECT * FROM siswa WHERE email = '$email' AND password = '$password' AND validated = '1'");
+		$query_siswa = mysqli_query($conn, "SELECT * FROM siswa WHERE email = '$email' AND password = '$password' AND validated = '0'");
 		$query_admin = mysqli_query($conn, "SELECT * FROM admin WHERE email = '$email' AND password = '$password'");
 		$query_guru = mysqli_query($conn, "SELECT * FROM guru WHERE email = '$email' AND password = '$password'");
 		
-		if( mysqli_num_rows($query_user_validate) === 1) 
+		if( mysqli_num_rows($query_siswa_validate) === 1) 
 		{
 			$_SESSION["login"] = true;
-			$row=mysqli_fetch_assoc( $query_user_validate );
-			$userid = $row['id_user'];
-			$username = $row['nama_user'];
-			$_SESSION["id"] = $userid;
-			$_SESSION["username"] = $username;
-			header("Location: users/course/kelas.php");
+			$row=mysqli_fetch_assoc( $query_siswa_validate );
+			$siswaid = $row['id_siswa'];
+			$siswaname = $row['nama_siswa'];
+			$_SESSION["id"] = $siswaid;
+			$_SESSION["username"] = $siswaname;
+			header("Location: siswa/course/kelas.php");
 			exit;
 		}
-		elseif (mysqli_num_rows($query_user) === 1) {
+		elseif (mysqli_num_rows($query_siswa) === 1) {
 			$error = 1;
 		}
 		elseif (mysqli_num_rows($query_admin) === 1) {

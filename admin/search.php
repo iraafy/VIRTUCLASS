@@ -2,18 +2,18 @@
 	if (isset($_POST['search'])) {
 		require_once '../conn.php';
 		$search = $_POST['search'];
-		$query = mysqli_query($conn, "SELECT * FROM user WHERE nama_user LIKE '%" . $search . "%'"); ?>
-		<?php foreach ($query as $dataUser) { ?>
+		$query = mysqli_query($conn, "SELECT * FROM siswa WHERE nama_siswa LIKE '%" . $search . "%'"); ?>
+		<?php foreach ($query as $datasiswa) { ?>
 			<tr>
-				<td><?php echo $dataUser['nama_user'] ?> </td>
-				<td><?php echo $dataUser['asal_sekolah'] ?> </td>
-				<td><?php echo $dataUser['email'] ?> </td>
-				<td><?php echo $dataUser['telepon'] ?> </td>
+				<td><?php echo $datasiswa['nama_siswa'] ?> </td>
+				<td><?php echo $datasiswa['asal_sekolah'] ?> </td>
+				<td><?php echo $datasiswa['email'] ?> </td>
+				<td><?php echo $datasiswa['telepon'] ?> </td>
 				<td>
-					<?php if ($dataUser['validated'] == "1") { ?>
-						<a href="acc.php?id_user=<?php echo $dataUser['id_user']; ?>" class="btn disabled" style="background-color: lightgrey; color: black;">Tervalidasi</a>
+					<?php if ($datasiswa['validated'] == "1") { ?>
+						<a href="acc.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn disabled" style="background-color: lightgrey; color: black;">Tervalidasi</a>
 					<?php } else { ?>
-						<a href="acc.php?id_user=<?php echo $dataUser['id_user']; ?>" class="btn btn-danger">Validasi</a>
+						<a href="acc.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn btn-danger">Validasi</a>
 					<?php } ?>
 				</td>
 			</tr>

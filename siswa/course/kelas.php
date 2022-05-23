@@ -8,7 +8,7 @@
 	}
 	$kelas = mysqli_query($conn, 'SELECT * FROM kelas'); 
 	$course = mysqli_query($conn, 'SELECT * FROM course');                                
-	$user = mysqli_query($conn, 'SELECT * FROM user');                                
+	$siswa = mysqli_query($conn, 'SELECT * FROM siswa');                                
 	$sql = mysqli_query($conn,"SELECT nama_kelas FROM kelas GROUP BY nama_kelas");
 ?>
 
@@ -98,10 +98,10 @@
         </div>
 
 		<div class="row mt-5">
-			<?php foreach ($user as $keyUser) { ?>
-				<?php if ($keyUser['id_user'] == $_SESSION["id"]) { ?>
-					<?php $getkel = $keyUser['kelas']?>
-					<?php if ($keyUser['kelas'] == "null") { ?>
+			<?php foreach ($siswa as $keysiswa) { ?>
+				<?php if ($keysiswa['id_siswa'] == $_SESSION["id"]) { ?>
+					<?php $getkel = $keysiswa['kelas']?>
+					<?php if ($keysiswa['kelas'] == "null") { ?>
 						<div class="card p-4">		
 							<h5 style="color: #991311">
 								Silahkan pilih kelas terlebih dahulu, setelah memasukan data kelas anda tidak bisa merubahnya kembali.
@@ -179,7 +179,7 @@
 	if(isset($_POST['update']))
     {
         $pilihan = $_POST["dataKelas"];
-		$query = "UPDATE user SET kelas = '$pilihan' WHERE id_user = $_SESSION[id]";
+		$query = "UPDATE siswa SET kelas = '$pilihan' WHERE id_siswa = $_SESSION[id]";
 		mysqli_query($conn, $query);
 		header('location: kelas.php');
     }

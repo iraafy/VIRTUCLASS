@@ -310,7 +310,7 @@
 								<?=$list['content']?>
 							</td>
 							<td>
-								<a href="detail.php?id_user=" class="btn btn-outline-success"><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: green;"></span></a>
+								<a href="detail.php?id_siswa=" class="btn btn-outline-success"><span class="iconify-inline" data-icon="clarity:note-edit-line" style="color: green;"></span></a>
 								&nbsp;
 								<a href="hapus_modul.php?id_submodul=<?= $list['id_submodul']; ?>" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
 							</td>

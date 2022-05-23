@@ -7,7 +7,7 @@
         exit;
     }
     $error = 0;
-    $user = mysqli_query($conn, 'SELECT * FROM user');
+    $siswa = mysqli_query($conn, 'SELECT * FROM siswa');
     $kelas = mysqli_query($conn, 'SELECT * FROM kelas');
     $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
 
@@ -20,7 +20,7 @@
         $telepon = $_POST["telepon"];
         
         //add to db
-        mysqli_query($conn, "UPDATE user SET nama_user='$nama', asal_sekolah='$asal', email='$email', telepon='$telepon' WHERE id_user = '$_SESSION[id]'");
+        mysqli_query($conn, "UPDATE siswa SET nama_siswa='$nama', asal_sekolah='$asal', email='$email', telepon='$telepon' WHERE id_siswa = '$_SESSION[id]'");
 
         return mysqli_affected_rows($conn);
 
@@ -45,7 +45,7 @@
 		$tgl = date('Y/m/d');
 		$nilai = $data["nilai"];
 		$kategori_nilai = $data["kategori_nilai"];
-		$id_user = $_SESSION["id"];
+		$id_siswa = $_SESSION["id"];
 		$id_course = $data["courseDataNilai"];
         $filename = $_FILES['file1']['name'];
 
@@ -58,7 +58,7 @@
                 $filename = md5(time()).'-'.$_SESSION['username'].'-'.$filename;
                 $path = '../admin/bukti/nilai/';
                 move_uploaded_file($_FILES['file1']['tmp_name'],($path . $filename));
-                $sql = "INSERT INTO record_siswa VALUES('', '$tgl', '$nilai', '$kategori_nilai', '$id_user', '$id_course', '$filename')";
+                $sql = "INSERT INTO record_siswa VALUES('', '$tgl', '$nilai', '$kategori_nilai', '$id_siswa', '$id_course', '$filename')";
                 mysqli_query($conn, $sql);
                 return mysqli_affected_rows($conn);
             }
@@ -175,16 +175,16 @@
             <div class="card-body p-5">
                 <h1>
                     <b>
-                        <?php foreach ($user as $key) { ?>
-                            <?php if ($key['id_user'] == $_SESSION["id"]) { ?>
-                                <?php echo $key['nama_user']; ?>
+                        <?php foreach ($siswa as $key) { ?>
+                            <?php if ($key['id_siswa'] == $_SESSION["id"]) { ?>
+                                <?php echo $key['nama_siswa']; ?>
                             <?php } ?>
                         <?php } ?>
                     </b>
                 </h1>
                 <h5>
-                    <?php foreach ($user as $key) { ?>
-                        <?php if ($key['id_user'] == $_SESSION["id"]) { ?>
+                    <?php foreach ($siswa as $key) { ?>
+                        <?php if ($key['id_siswa'] == $_SESSION["id"]) { ?>
                             <?php echo $key['asal_sekolah']; ?>
                         <?php } ?>
                     <?php } ?>
@@ -199,10 +199,10 @@
                         <button type="button" style="float: right; background-color: #991311; color: white;" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <span class="iconify-inline" data-icon="ep:edit"></span>
                         </button>
-                        <?php foreach ($user as $dataUser) { ?>
-                            <?php if ($dataUser['id_user'] == $_SESSION['id']) { ?>
+                        <?php foreach ($siswa as $datasiswa) { ?>
+                            <?php if ($datasiswa['id_siswa'] == $_SESSION['id']) { ?>
                                 <?php foreach ($kelas as $dataKelas) { ?>
-                                    <?php if ($dataUser['kelas'] == $dataKelas['nama_kelas']) { ?>
+                                    <?php if ($datasiswa['kelas'] == $dataKelas['nama_kelas']) { ?>
                                         <?php $getKelasID = $dataKelas['id_kelas']; ?>
                                     <?php } ?>
                                 <?php } ?>
@@ -221,7 +221,7 @@
                                                                 Nama Siswa
                                                             </td>
                                                             <td>
-                                                                : &nbsp; <input type="text" style="border: none;" name="uname" value="<?php echo $dataUser['nama_user'] ?>">
+                                                                : &nbsp; <input type="text" style="border: none;" name="uname" value="<?php echo $datasiswa['nama_siswa'] ?>">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -229,7 +229,7 @@
                                                                 Asal Sekolah
                                                             </td>
                                                             <td>
-                                                                : &nbsp; <input type="text" style="border: none;" name="asal" value="<?php echo $dataUser['asal_sekolah'] ?>">
+                                                                : &nbsp; <input type="text" style="border: none;" name="asal" value="<?php echo $datasiswa['asal_sekolah'] ?>">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -237,7 +237,7 @@
                                                                 Email
                                                             </td>
                                                             <td>
-                                                                : &nbsp; <input type="text" style="border: none;" name="email" value="<?php echo $dataUser['email'] ?>">
+                                                                : &nbsp; <input type="text" style="border: none;" name="email" value="<?php echo $datasiswa['email'] ?>">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -245,7 +245,7 @@
                                                                 Telepon
                                                             </td>
                                                             <td>
-                                                                : &nbsp; <input type="text" style="border: none;" name="telepon" value="<?php echo $dataUser['telepon'] ?>">
+                                                                : &nbsp; <input type="text" style="border: none;" name="telepon" value="<?php echo $datasiswa['telepon'] ?>">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -263,8 +263,8 @@
                         <br>
                         <img class="rounded-circle mx-auto d-block mt-5 mb-4" style="border: 4px solid #5e5e5e;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Breezeicons-actions-22-im-user.svg/512px-Breezeicons-actions-22-im-user.svg.png" width="90">
                         <div class="text-center mt-5 mb-5">
-                            <?php foreach ($user as $key) { ?>
-                                <?php if ($key['id_user'] == $_SESSION["id"]) { ?>
+                            <?php foreach ($siswa as $key) { ?>
+                                <?php if ($key['id_siswa'] == $_SESSION["id"]) { ?>
                                     <h6 class="font-weight-bold"><?php echo $key['email']; ?> </h6>
                                     <h6 class="text-black-50"><?php echo $key['telepon']; ?> </h6>
                                     <h6 class="text-black-50"><?php echo $key['jk']; ?> </h6>
@@ -371,7 +371,7 @@
                         <div class="input-group">
                             <input type="file" name="file1" class="form-control" id="inputGroupFile02">
                         </div>
-                        <button type="submit" name="upload_nilai" class="btn mt-4" style="float: right; background-color: #991311; color: white;">Upload Nilai</button>
+                        <button type="submit" name="upload_nilai" class="btn mt-4" style="float: right; background-color: #991311; color: white;">Upload</button>
                     </form>
                     </div>
                 </div>
@@ -402,11 +402,11 @@
     <script>
         <?php  
             $nilai = array(); 
-            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='PHB' AND id_course = '<script>document.write(myval);</script>'");
+            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='PHB' AND id_course = '<script>document.write(myval);</script>'");
             $nilai = mysqli_fetch_all($nilai_sql);
 
             $tanggal = array(); 
-            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='PHB' AND id_course = '<script>document.write(myval);</script>'");
+            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='PHB' AND id_course = '<script>document.write(myval);</script>'");
             $tanggal = mysqli_fetch_all($tanggal_sql);
         ?>
 
@@ -450,11 +450,11 @@
     <script>
         <?php  
             $nilai = array(); 
-            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='UTS'");
+            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UTS'");
             $nilai = mysqli_fetch_all($nilai_sql);
 
             $tanggal = array(); 
-            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='UTS'");
+            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UTS'");
             $tanggal = mysqli_fetch_all($tanggal_sql);
         ?>
 
@@ -498,11 +498,11 @@
     <script>
         <?php  
             $nilai = array(); 
-            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='UAS'");
+            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UAS'");
             $nilai = mysqli_fetch_all($nilai_sql);
 
             $tanggal = array(); 
-            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_user = $_SESSION[id] AND kategori_nilai ='UAS'");
+            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UAS'");
             $tanggal = mysqli_fetch_all($tanggal_sql);
         ?>
 

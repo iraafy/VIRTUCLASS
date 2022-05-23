@@ -7,7 +7,7 @@
         exit;
     }
     include '../conn.php';
-	$user = mysqli_query($conn, 'SELECT * FROM user'); 
+	$siswa = mysqli_query($conn, 'SELECT * FROM siswa'); 
 ?>
 
 <!doctype html>
@@ -80,17 +80,17 @@
 					</tr>
 				</thead>
 				<tbody id="tampil">
-					<?php foreach ($user as $dataUser) { ?>
+					<?php foreach ($siswa as $datasiswa) { ?>
 						<tr>
-							<td><?php echo $dataUser['nama_user'] ?> </td>
-							<td><?php echo $dataUser['asal_sekolah'] ?> </td>
-							<td><?php echo $dataUser['email'] ?> </td>
-							<td><?php echo $dataUser['telepon'] ?> </td>
+							<td><?php echo $datasiswa['nama_siswa'] ?> </td>
+							<td><?php echo $datasiswa['asal_sekolah'] ?> </td>
+							<td><?php echo $datasiswa['email'] ?> </td>
+							<td><?php echo $datasiswa['telepon'] ?> </td>
 							<td>
 								<!-- Button trigger modal -->
-								<a href="detail.php?id_user=<?php echo $dataUser['id_user']; ?>" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal-<?php echo $dataUser['id_user']; ?>">Detail</a>
+								<a href="detail.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal-<?php echo $datasiswa['id_siswa']; ?>">Detail</a>
 								<!-- Modal -->
-								<div class="modal fade" id="exampleModal-<?php echo $dataUser['id_user']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal fade" id="exampleModal-<?php echo $datasiswa['id_siswa']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -104,7 +104,7 @@
 															Nama Pelajar
 														</td>
 														<td>
-															: <?php echo $dataUser['nama_user'] ?>
+															: <?php echo $datasiswa['nama_siswa'] ?>
 														</td>
 													</tr>
 													<tr>
@@ -112,7 +112,7 @@
 															Asal Sekolah
 														</td>
 														<td>
-															: <?php echo $dataUser['asal_sekolah'] ?>
+															: <?php echo $datasiswa['asal_sekolah'] ?>
 														</td>
 													</tr>
 													<tr>
@@ -120,7 +120,7 @@
 															Jenis Kelamin
 														</td>
 														<td>
-															: <?php echo $dataUser['jk'] ?>
+															: <?php echo $datasiswa['jk'] ?>
 														</td>
 													</tr>
 													<tr>
@@ -128,7 +128,7 @@
 															Email
 														</td>
 														<td>
-															: <?php echo $dataUser['email'] ?>
+															: <?php echo $datasiswa['email'] ?>
 														</td>
 													</tr>
 													<tr>
@@ -136,7 +136,7 @@
 															Telepon
 														</td>
 														<td>
-															: <?php echo $dataUser['telepon'] ?>
+															: <?php echo $datasiswa['telepon'] ?>
 														</td>
 													</tr>
 													<tr>
@@ -144,8 +144,8 @@
 															Kartu Pelajar
 														</td>
 														<td>
-															<a href="detail_kartu.php?kartu_pelajar=<?php echo $dataUser['kartu_pelajar'] ?>" class="link-preview" target="_blank" rel="nofollow">
-																<?php echo $dataUser['kartu_pelajar'] ?>
+															<a href="detail_kartu.php?kartu_pelajar=<?php echo $datasiswa['kartu_pelajar'] ?>" class="link-preview" target="_blank" rel="nofollow">
+																<?php echo $datasiswa['kartu_pelajar'] ?>
 															</a>
 														</td>
 													</tr>
@@ -153,10 +153,10 @@
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-												<?php if ($dataUser['validated'] == "1") { ?>
-													<a href="acc.php?id_user=<?php echo $dataUser['id_user']; ?>" class="btn disabled" style="background-color: lightgrey; color: black;">Tervalidasi</a>
+												<?php if ($datasiswa['validated'] == "1") { ?>
+													<a href="acc.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn disabled" style="background-color: lightgrey; color: black;">Tervalidasi</a>
 												<?php } else { ?>
-													<a href="acc.php?id_user=<?php echo $dataUser['id_user']; ?>" class="btn btn-danger">Validasi</a>
+													<a href="acc.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn btn-danger">Validasi</a>
 												<?php } ?>
 											</div>
 										</div>
@@ -164,10 +164,10 @@
 								</div>
 							</td>
 							<td>
-								<?php if ($dataUser['validated'] == "1") { ?>
-									<a href="acc.php?id_user=<?php echo $dataUser['id_user']; ?>" class="btn disabled" style="background-color: lightgrey; color: black;">Tervalidasi</a>
+								<?php if ($datasiswa['validated'] == "1") { ?>
+									<a href="acc.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn disabled" style="background-color: lightgrey; color: black;">Tervalidasi</a>
 								<?php } else { ?>
-									<a href="acc.php?id_user=<?php echo $dataUser['id_user']; ?>" class="btn btn-danger">Validasi</a>
+									<a href="acc.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn btn-danger">Validasi</a>
 								<?php } ?>
 							</td>
 						</tr>

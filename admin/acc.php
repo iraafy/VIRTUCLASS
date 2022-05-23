@@ -8,7 +8,7 @@
         exit;
     }
     else{
-        $query = "UPDATE user SET validated = 1 WHERE id_user = $_GET[id_user]";
+        $query = "UPDATE siswa SET validated = 1 WHERE id_siswa = $_GET[id_siswa]";
         mysqli_query($conn, $query);
         header('location: admin.php');
     }

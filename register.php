@@ -7,7 +7,7 @@
 	function registrasi($data) 
 	{
 		global $conn;
-		$nama_user = $data["nama_user"];
+		$nama_siswa = $data["nama_siswa"];
 		$asal_sekolah = $data["asal_sekolah"];
 		$jk = $data["jk"];
 		$email = $data["email"];
@@ -15,7 +15,7 @@
 		$password = $data["password"];
 		// $password = password_hash($password, PASSWORD_DEFAULT);
 		$validated = 0;
-		$find_email = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
+		$find_email = mysqli_query($conn, "SELECT email FROM siswa WHERE email = '$email'");
 		if( mysqli_fetch_assoc($find_email) )
 		{
 			echo "<script>
@@ -34,7 +34,7 @@
 					$filename = md5(time()).'-'.$filename;
 					$path = 'admin/bukti/kartu_pelajar/';
 					move_uploaded_file($_FILES['file1']['tmp_name'],($path . $filename));
-					$sql = "INSERT INTO user VALUES('', '$nama_user', '$asal_sekolah', '$jk', 'null', '$email', '$telepon', '$password', '$filename', '$validated')";
+					$sql = "INSERT INTO siswa VALUES('', '$nama_siswa', '$asal_sekolah', '$jk', 'null', '$email', '$telepon', '$password', '$filename', '$validated')";
 					mysqli_query($conn, $sql);
 					return mysqli_affected_rows($conn);
 				}
@@ -110,7 +110,7 @@
 				<form method="post" action="" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label for="nama" class="form-label">Nama</label>
-						<input type="text" name="nama_user" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap">
+						<input type="text" name="nama_siswa" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap">
 					</div>
 
 					<div class="mb-3">

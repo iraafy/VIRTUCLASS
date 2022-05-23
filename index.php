@@ -30,7 +30,7 @@
 						<a class="nav-link" href="index.php"><b>Home</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="users/course/kelas.php">Course&emsp;</a>
+						<a class="nav-link" href="siswa/course/kelas.php">Course&emsp;</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#about">About&emsp;</a>
@@ -44,7 +44,7 @@
 							<span class="iconify" style="font-size: 25px; color: black" data-icon="healthicons:ui-user-profile-outline"></span>
 							</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								<a class="dropdown-item" href="users/profile.php">
+								<a class="dropdown-item" href="siswa/profile.php">
 									<?php
 										if(!isset($_SESSION["login"])) {
 											echo "Profil";
@@ -87,7 +87,7 @@
 							<br><br>
 							<p class="title-1"><b>Virtu</b>Class</p>
 							<p class="title-2">Belajar, Bercanda, Mengerti</p>
-							<a href="users/course/kelas.php" class="tombol">Coba Sekarang</a>
+							<a href="siswa/course/kelas.php" class="tombol">Coba Sekarang</a>
 						</div>
 					</div>
 				</div>
@@ -425,9 +425,6 @@
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-6 col-6">
 						<a href="#about" style="text-decoration: none; color: black; font-size: 14px">About</a> <br>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-6 col-6">
-						<a href="users/course/kelas.php" style="text-decoration: none; color: black; font-size: 14px">Course</a> <br>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-6 col-6">
 						<a href="#faq" style="text-decoration: none; color: black; font-size: 14px">FAQ</a> <br>
