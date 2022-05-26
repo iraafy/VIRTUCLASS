@@ -9,9 +9,9 @@
         exit;
     }
     else{
-        $querymodul = "DELETE FROM modul WHERE id_modul = $_GET[id_modul]";
-        mysqli_query($conn, $querymodul);
-        header('location: uploadMateri.php');       
+        $querysubmodul = "DELETE FROM submodul WHERE id_submodul = $_GET[id_submodul]";
+        mysqli_query($conn, $querysubmodul);
+        header('location: uploadMateri.php');
     }
 
 ?>

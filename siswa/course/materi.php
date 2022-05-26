@@ -28,7 +28,7 @@
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" href="../../index.php">
                 <img src="../../assets/img/virtuclass_logo.svg" width="50px" alt="virtuclass-logo">
             </a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -158,8 +158,6 @@
 			</div>
 		</div>
 	</div>
-	
-
 
 	<!-- iconify -->
 	<script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>

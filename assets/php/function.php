@@ -96,13 +96,8 @@
         $nama = $data["nama"];
         $email = $data["email"];
         $password = $data["password"];
-        $rep_password = $data["rep_password"];
 
-        if($password != $rep_password){
-            echo "<script>
-                    alert('Pastikan password yang anda masukkan sama!');
-                </script>";
-
+        if($password == '' && $email == ''){
             return false;
         }
 

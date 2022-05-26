@@ -347,7 +347,7 @@
                     <form action="" method="post" enctype="multipart/form-data">
                         <label class="mt-3 mb-2" for="inputGroupSelect01"><b>Kategori Nilai</b></label>
                         <div class="input-group">
-                            <select class="form-select" id="inputGroupSelect01" name="kategori_nilai">
+                            <select class="form-select" id="inputGroupSelect01" name="kategori_nilai" required>
                                 <option value="PHB">PHB</option>
                                 <option value="UTS">UTS</option>
                                 <option value="UAS">UAS</option>
@@ -355,21 +355,21 @@
                         </div>
                         <label class="mt-3 mb-2" for="inputGroupSelect01"><b>Course</b></label>
                         <div class="input-group">
-                            <select name="courseDataNilai" class="form-select" id="courseDataNilai">
+                            <select name="courseDataNilai" class="form-select" id="courseDataNilai" required>
                                 <?php 
                                     $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
                                     while ($row = mysqli_fetch_array($sql)) { ?>
-                                    <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
+                                    <option value="<?= $row['id_course'];?>" > <?= $row['nama_course'];?> </option>;
                                 <?php } ?>
                             </select>
                         </div>
                         <label class="mt-3 mb-2"><b>Nilai</b></label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="nilai" placeholder="Masukan nilai">
+                            <input type="text" class="form-control" name="nilai" placeholder="Masukan nilai" required>
                         </div>
                         <label class="mt-3 mb-2"><b>Bukti</b></label>
                         <div class="input-group">
-                            <input type="file" name="file1" class="form-control" id="inputGroupFile02">
+                            <input type="file" name="file1" class="form-control" id="inputGroupFile02" required>
                         </div>
                         <button type="submit" name="upload_nilai" class="btn mt-4" style="float: right; background-color: #991311; color: white;">Upload</button>
                     </form>

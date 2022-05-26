@@ -26,7 +26,7 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
 			<a class="navbar-brand" href="../../index.php">
                 <img src="../../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
@@ -142,12 +142,12 @@
 														<?php $getID_Course = $keyCourse['id_course']; ?>
 														<?php if ($keyCourse['id_kelas'] == $getID_Kelas) { ?>
 															<div class="col-lg-3 col-md-4 col-sm-6 col-6 p-2">
-																<div class="card" style="width: 18rem;">
+																<div class="card">
 																	<img src="<?php echo $keyCourse['url_bg']; ?>" class="card-img-top" alt="...">
 																	<div class="card-body">
 																		<h5 class="card-title"><?php echo $keyCourse['nama_course']; ?></h5>
 																		<p class="card-text"><?php echo $keyCourse['desc_course']; ?></p>
-																		<a href="materi.php?id_course=<?php echo $getID_Course?>" class="btn btn-primary">Lihat Materi</a>
+																		<a href="materi.php?id_course=<?php echo $getID_Course?>" class="btn btn-danger">Lihat Materi</a>
 																	</div>
 																</div>
 															</div>	

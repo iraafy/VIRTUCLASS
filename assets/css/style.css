@@ -23,6 +23,8 @@ body{
 
 .ellipsis {
   max-width: 100px;
+  /* max-height: 50px; */
+  /* word-break: break-all; */
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

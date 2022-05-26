@@ -17,7 +17,7 @@
 	{
 		if( upload_guru($_POST) > 0 ) 
 		{
-			$notif = 1;
+			$notif = 2;
 			header("Refresh: 4; url=mgmt_guru.php");
 		}
 		else
@@ -46,7 +46,7 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
 			<a class="navbar-brand" href="#">
                 <img src="../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
@@ -76,6 +76,7 @@
 		</div>
 	</nav>
 
+	<br><br>
     <div class="container mt-5 mb-5">
 		<h3 class="text-center mt-3 mb-5" style="color: #991311">
 			<b>
@@ -88,7 +89,7 @@
 					<li class="breadcrumb-item active" aria-current="page" style="color: white;">Data Guru gagal ditambahkan</li>
 				</ol>
 			</nav>
-		<?php } elseif ($notif == 1) { ?>
+		<?php } elseif ($notif == 2) { ?>
 			<nav aria-label="breadcrumb" style="background-color: #97cc9b; border-radius: 5px !important;" class="mb-4 p-2">
 				<ol class="breadcrumb flex">
 					<li class="breadcrumb-item active" aria-current="page" style="color: white;">Data Guru berhasil ditambahkan</li>
@@ -107,15 +108,15 @@
 						<form action="" method="post">
 							<label class="mt-3 mb-2"><b>Nama Guru</b></label>
 							<div class="input-group">
-								<input type="text" class="form-control" name="nama" placeholder="Nama">
+								<input type="text" class="form-control" name="nama" placeholder="Nama" required>
 							</div>
 							<label class="mt-3 mb-2"><b>Email Guru</b></label>
 							<div class="input-group">
-								<input type="text" name="email" class="form-control" id="inputGroupFile02" placeholder="Email">
+								<input type="text" name="email" class="form-control" id="inputGroupFile02" placeholder="Email" required>
 							</div>
 							<label class="mt-3 mb-2"><b>Generate Password</b></label>
 							<div class="input-group">
-								<input type="text" class="form-control" name="password" value="<?= rand_string(8); ?>" placeholder="Password">
+								<input type="text" class="form-control" name="password" value="<?= rand_string(8); ?>" placeholder="Password" required>
 							</div>
 							<button type="submit" name="upload_guru" class="btn mt-4 mb-3" style="float: right; background-color: #991311; color: white;" >Upload</button>
 						</form>

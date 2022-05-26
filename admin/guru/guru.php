@@ -25,7 +25,7 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
 			<a class="navbar-brand" href="guru.php">
                 <img src="../../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
@@ -49,6 +49,7 @@
 		</div>
 	</nav>
 
+	<br><br>
 	<div class="container mt-5">
 		<div class="card">
             <div class="card-body">
