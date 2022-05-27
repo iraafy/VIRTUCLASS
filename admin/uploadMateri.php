@@ -28,12 +28,12 @@
 		if( upload_modul($_POST) > 0 ) 
 		{
 			$notif = 2;
-			header("Refresh: 4; url=uploadMateri.php");
+			header("Refresh: 3; url=uploadMateri.php");
 		}
 		else
 		{
 			$error = 2;
-			header("Refresh: 4; url=uploadMateri.php");
+			header("Refresh: 3; url=uploadMateri.php");
 		}
 	}
 	else if( isset($_POST["upload_submodul"]) ) 
@@ -42,12 +42,12 @@
 		if( upload_submodul($_POST) > 0 ) 
 		{
 			$notif = 3;
-			header("Refresh: 4; url=uploadMateri.php");
+			header("Refresh: 3; url=uploadMateri.php");
 		}
 		else
 		{
 			$error = 3;
-			header("Refresh: 4; url=uploadMateri.php");
+			header("Refresh: 3; url=uploadMateri.php");
 		}
 	}
 	else if( isset($_POST["upload_kelas"]) ) 
@@ -56,12 +56,26 @@
 		if( upload_kelas($_POST) > 0 ) 
 		{
 			$notif = 4;
-			header("Refresh: 4; url=uploadMateri.php");
+			header("Refresh: 3; url=uploadMateri.php");
 		}
 		else
 		{
 			$error = 4;
-			header("Refresh: 4; url=uploadMateri.php");
+			header("Refresh: 3; url=uploadMateri.php");
+		}
+	}
+
+	if ( isset($_POST["update_modul"])) 
+	{
+		if( update_submodul($_POST) > 0 ) 
+		{
+			$notif = 5;
+			header("Refresh: 3; url=uploadMateri.php");
+		}
+		else
+		{
+			$error = 5;
+			header("Refresh: 3; url=uploadMateri.php");
 		}
 	}
 
@@ -433,6 +447,19 @@
 		</div>
 		<br><br>
 		<div class="row">
+			<?php if ($error == 5) { ?>
+				<nav aria-label="breadcrumb" style="background-color: #ba8888; border-radius: 5px !important;" class="mb-4 p-2">
+					<ol class="breadcrumb flex">
+						<li class="breadcrumb-item active" aria-current="page" style="color: white;">Materi gagal diupdate</li>
+					</ol>
+				</nav>
+			<?php } elseif ($notif == 5) { ?>
+				<nav aria-label="breadcrumb" style="background-color: #97cc9b; border-radius: 5px !important;" class="mb-4 p-2">
+					<ol class="breadcrumb flex">
+						<li class="breadcrumb-item active" aria-current="page" style="color: white;">Materi berhasil diupdate</li>
+					</ol>
+				</nav>
+			<?php } ?>
 			<table class="table">
 				<thead>
 					<tr style="font-weight: bold; text-align:center;">
@@ -488,39 +515,28 @@
 								<div class="modal fade" id="exampleModal4-<?php echo $list['id_submodul']; ?>" tabindex="-1" aria-labelledby="exampleModal4Label" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-scrollable modal-xl">
 										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModal4Label">Update Modul</h5>
-												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body" style="text-align: justify">
-												<div class="row mt-1 mb-3">
-													<!-- <div class="input-group">
-														<select class="form-select" id="kategori_modul" name="kategori_modul" value="<?= $list['id_kelas']; ?>" required>
-															<?php foreach ($kelas as $datakelas) { ?>
-																<option value="<?=$datakelas['id_kelas']?>"> <?=$datakelas['nama_kelas']?> </option> 
-															<?php } ?>
-														</select>
-													</div>
-													<div class="input-group">
-														<select class="form-select" id="kategori_modul" name="kategori_modul" value="<?= $list['id_kelas']; ?>" required>
-															<?php foreach ($kelas as $datakelas) { ?>
-																<option value="<?=$datakelas['id_kelas']?>"> <?=$datakelas['nama_kelas']?> </option> 
-															<?php } ?>
-														</select>
-													</div> -->
-													<label class="mt-3 mb-2"><b>Judul Sub-Modul</b></label>
-													<div class="input-group">
-														<input type="text" class="form-control" name="update_judul_content" value="<?= $list['judul_content']; ?>" required>
-													</div>
-													<label for="exampleFormControlTextarea1" class="form-label mt-3"><b>Isi Content</b></label>
-													<div class="mb-2">
-														<textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="update_content" required><?= $list['content']; ?></textarea>
+											<form action="" method="post">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModal4Label">Update Modul</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body" style="text-align: justify">
+													<div class="row mt-1 mb-3">
+														<input type="text" class="form-control" name="id_sub" value="<?= $list['id_submodul']; ?>" required hidden>
+														<label class="mb-2"><b>Judul Sub-Modul</b></label>
+														<div class="input-group">
+															<input type="text" class="form-control" name="update_judul_content" value="<?= $list['judul_content']; ?>" required>
+														</div>
+														<label for="exampleFormControlTextarea1" class="form-label mt-3"><b>Isi Content</b></label>
+														<div>
+															<textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="update_content" required><?= $list['content']; ?></textarea>
+														</div>
 													</div>
 												</div>
-											</div>
-											<div class="modal-footer">
-												<a href="update_content.php?id_submodul=<?php echo $list['id_submodul']; ?>" class="btn btn-danger">Update</a>
-											</div>
+												<div class="modal-footer">
+													<button type="submit" name="update_modul" class="btn btn-danger">Update</button>
+												</div>
+											</form>
 										</div>
 									</div>
 								</div>

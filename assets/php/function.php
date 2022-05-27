@@ -115,4 +115,15 @@
         return mysqli_affected_rows($conn);
     }
 
+    function update_submodul($data) 
+    {
+        global $conn;
+        $id_sub = $_POST["id_sub"];
+        $update_judul_content = $_POST["update_judul_content"];
+        $update_content = $_POST["update_content"];
+
+        mysqli_query($conn, "UPDATE submodul SET judul_content='$update_judul_content', content='$update_content' WHERE id_submodul = $id_sub");
+        return mysqli_affected_rows($conn);
+    }
+
 ?>

@@ -76,8 +76,7 @@
 						<th>Asal Sekolah</th>
 						<th>Email</th>
 						<th>Telepon</th>
-						<th>Detail</th>
-						<th>Status</th>
+						<th>OPSI</th>
 					</tr>
 				</thead>
 				<tbody id="tampil">
@@ -163,8 +162,6 @@
 										</div>
 									</div>
 								</div>
-							</td>
-							<td>
 								<?php if ($datasiswa['validated'] == "1") { ?>
 									<a href="acc.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn disabled" style="background-color: lightgrey; color: black;">Tervalidasi</a>
 								<?php } else { ?>
