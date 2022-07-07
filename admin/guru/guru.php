@@ -1,17 +1,17 @@
 <?php
 
-	session_start();
-	if( !isset($_SESSION["loginguru"]))
-    {
-        header("Location: ../../login.php");
-        exit;
-    }
-    include '../../conn.php';
-	$user = mysqli_query($conn, 'SELECT * FROM user'); 
+session_start();
+if (!isset($_SESSION["loginguru"])) {
+	header("Location: ../../login.php");
+	exit;
+}
+include '../../conn.php';
+$user = mysqli_query($conn, 'SELECT * FROM user');
 ?>
 
 <!doctype html>
 <html lang="en">
+
 <head>
 
 	<!-- Required meta tags -->
@@ -23,13 +23,14 @@
 	<link rel="stylesheet" href="../../assets/css/style.css">
 
 </head>
+
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
 			<a class="navbar-brand" href="guru.php">
-                <img src="../../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
-            </a>
+				<img src="../../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
+			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -52,13 +53,13 @@
 	<br><br>
 	<div class="container mt-5">
 		<div class="card">
-            <div class="card-body">
-                <div class="container p-5 ps-3">
-                    <h1>
-                        <b> Dashboard Guru </b>
-                    </h1>
-                </div>
-            </div>
+			<div class="card-body">
+				<div class="container p-5 ps-3">
+					<h1>
+						<b> Dashboard Guru </b>
+					</h1>
+				</div>
+			</div>
 		</div>
 	</div>
 	<br><br><br>
@@ -68,4 +69,5 @@
 	<!-- Option 1: Bootstrap Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
+
 </html>

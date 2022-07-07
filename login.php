@@ -1,32 +1,30 @@
 <?php
-	include 'conn.php';
-	$error = 0;
-	
-	session_start();
-	if(isset($_SESSION["login"]))
-	{
-	    header("Location: index.php");
-	    exit;
-	}
-	if(isset($_SESSION["loginadmin"]))
-	{
-		header("Location: admin/admin.php");
-		exit;
-	}		
-	if ( isset($_POST["submit"]) )
-	{
-		$email = $_POST["email"];
-		$password = $_POST["password"];
-		setcookie('siswa', $email);
-		$query_siswa_validate = mysqli_query($conn, "SELECT * FROM siswa WHERE email = '$email' AND password = '$password' AND validated = '1'");
-		$query_siswa = mysqli_query($conn, "SELECT * FROM siswa WHERE email = '$email' AND password = '$password' AND validated = '0'");
-		$query_admin = mysqli_query($conn, "SELECT * FROM admin WHERE email = '$email' AND password = '$password'");
-		$query_guru = mysqli_query($conn, "SELECT * FROM guru WHERE email = '$email' AND password = '$password'");
-		
-		if( mysqli_num_rows($query_siswa_validate) === 1) 
-		{
+include 'conn.php';
+$error = 0;
+
+session_start();
+if (isset($_SESSION["login"])) {
+	header("Location: index.php");
+	exit;
+}
+if (isset($_SESSION["loginadmin"])) {
+	header("Location: admin/admin.php");
+	exit;
+}
+if (isset($_POST["submit"])) {
+	$email = $_POST["email"];
+	$pass = $_POST["password"];
+	setcookie('siswa', $email);
+	$query_siswa_validate = mysqli_query($conn, "SELECT * FROM siswa WHERE email = '$email' AND validated = '1'");
+	$query_siswa = mysqli_query($conn, "SELECT * FROM siswa WHERE email = '$email' AND validated = '0'");
+	$query_admin = mysqli_query($conn, "SELECT * FROM admin WHERE email = '$email' AND password = '$pass'");
+	$query_guru = mysqli_query($conn, "SELECT * FROM guru WHERE email = '$email' AND password = '$pass'");
+
+	if (mysqli_num_rows($query_siswa_validate) === 1) {
+		$row = mysqli_fetch_assoc($query_siswa_validate);
+		echo $row["password"];
+		if (password_verify($pass, $row["password"])) {
 			$_SESSION["login"] = true;
-			$row=mysqli_fetch_assoc( $query_siswa_validate );
 			$siswaid = $row['id_siswa'];
 			$siswaname = $row['nama_siswa'];
 			$_SESSION["id"] = $siswaid;
@@ -34,30 +32,28 @@
 			header("Location: siswa/course/kelas.php");
 			exit;
 		}
-		elseif (mysqli_num_rows($query_siswa) === 1) {
+	} elseif (mysqli_num_rows($query_siswa) === 1) {
+		$row = mysqli_fetch_assoc($query_siswa);
+		if (password_verify($pass, $row["password"])) {
 			$error = 1;
 		}
-		elseif (mysqli_num_rows($query_admin) === 1) {
-			$_SESSION["loginadmin"] = true;
-
-			header("Location: admin/admin.php");
-			exit;
-		}
-		elseif (mysqli_num_rows($query_guru) === 1) {
-			$_SESSION["loginguru"] = true;
-
-			header("Location: admin/guru/guru.php");
-			exit;
-		}
-		else
-		{
-			$error = 2;
-		}
-	} 
+	} elseif (mysqli_num_rows($query_admin) === 1) {
+		$_SESSION["loginadmin"] = true;
+		header("Location: admin/admin.php");
+		exit;
+	} elseif (mysqli_num_rows($query_guru) === 1) {
+		$_SESSION["loginguru"] = true;
+		header("Location: admin/guru/guru.php");
+		exit;
+	} else {
+		$error = 2;
+	}
+}
 ?>
-			
+
 <!doctype html>
 <html lang="en">
+
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -68,7 +64,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 	<script src="https://kit.fontawesome.com/9da43ad1c6.js" crossorigin="anonymous"></script>
-	
+
 	<title>Login</title>
 </head>
 
@@ -98,19 +94,16 @@
 				<form method="post">
 					<div class="mb-3">
 						<label for="email" class="form-label">Email</label>
-						<input type="email" name="email" class="form-control" id="email" placeholder="Masukkan Email">
+						<input type="email" name="email" class="form-control" id="email" placeholder="Masukkan Email" required>
 					</div>
 
 					<div class="mb-1">
 						<label for="password" class="form-label">Password</label>
-						<input type="password" name="password" class="form-control" placeholder="Masukkan Password">
+						<input type="password" name="password" class="form-control" placeholder="Masukkan Password" required>
 					</div>
 
 					<div class="d-flex justify-content-between align-items-center mb-4">
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" id="form-check" />
-							<label class="form-check-label" for="form-check">Ingat saya</label>
-						</div>
+						<div class="form-check"></div>
 						<a href="#!" class="text-body text-muted">Lupa password?</a>
 					</div>
 
@@ -126,4 +119,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

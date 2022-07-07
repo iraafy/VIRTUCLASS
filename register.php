@@ -1,73 +1,63 @@
 <?php
 
-	require 'conn.php';
-	session_start();
+require 'conn.php';
+session_start();
 
-    $error = 0;
-	function registrasi($data) 
-	{
-		global $conn;
-		$nama_siswa = $data["nama_siswa"];
-		$asal_sekolah = $data["asal_sekolah"];
-		$jk = $data["jk"];
-		$email = $data["email"];
-		$telepon = $data["telepon"];
-		$password = $data["password"];
-		// $password = password_hash($password, PASSWORD_DEFAULT);
-		$validated = 0;
-		$find_email = mysqli_query($conn, "SELECT email FROM siswa WHERE email = '$email'");
-		if( mysqli_fetch_assoc($find_email) )
-		{
-			echo "<script>
+$error = 0;
+function registrasi($data)
+{
+	global $conn;
+	$nama_siswa = $data["nama_siswa"];
+	$asal_sekolah = $data["asal_sekolah"];
+	$jk = $data["jk"];
+	$email = $data["email"];
+	$telepon = $data["telepon"];
+	$passwordd = $data["password"];
+	$password = password_hash($passwordd, PASSWORD_DEFAULT);
+	$validated = 0;
+	$find_email = mysqli_query($conn, "SELECT email FROM siswa WHERE email = '$email'");
+	if (mysqli_fetch_assoc($find_email)) {
+		echo "<script>
 				alert('email sudah terdaftar!');
 			</script>";
-		}
-		else 
-		{
-			$filename = $_FILES['file1']['name'];
-			if($filename != '')
-			{
-				$ext = pathinfo($filename, PATHINFO_EXTENSION);
-				$allowed = ['pdf', 'png', 'jpg', 'jpeg'];
-				if (in_array($ext, $allowed))
-				{
-					$filename = md5(time()).'-'.$filename;
-					$path = 'admin/bukti/kartu_pelajar/';
-					move_uploaded_file($_FILES['file1']['tmp_name'],($path . $filename));
-					$sql = "INSERT INTO siswa VALUES('', '$nama_siswa', '$asal_sekolah', '$jk', 'null', '$email', '$telepon', '$password', '$filename', '$validated')";
-					mysqli_query($conn, $sql);
-					return mysqli_affected_rows($conn);
-				}
-				else
-				{
-					echo "<script>
+	} else {
+		$filename = $_FILES['file1']['name'];
+		if ($filename != '') {
+			$ext = pathinfo($filename, PATHINFO_EXTENSION);
+			$allowed = ['pdf', 'png', 'jpg', 'jpeg'];
+			if (in_array($ext, $allowed)) {
+				$filename = md5(time()) . '-' . $filename;
+				$path = 'admin/bukti/kartu_pelajar/';
+				move_uploaded_file($_FILES['file1']['tmp_name'], ($path . $filename));
+				$sql = "INSERT INTO siswa VALUES('', '$nama_siswa', '$asal_sekolah', '$jk', '$email', '$telepon', '$password', '$filename', '$validated', 'null')";
+				mysqli_query($conn, $sql);
+				return mysqli_affected_rows($conn);
+			} else {
+				echo "<script>
 						alert('File kartu pelajar tidak sesuai kriteria (gunakan pdf, png, jpg, atau jpeg).');
 					</script>";
-				}
 			}
-			else {
-				echo "<script>
+		} else {
+			echo "<script>
 					alert('File kartu pelajar tidak sesuai kriteria!');
-				</script>";	
-			}
+				</script>";
 		}
 	}
+}
 
-	if (isset($_POST['submit'])) 
-	{ 
-		if( registrasi($_POST) > 0 ) 
-		{
-			$error = 1;
-		}
-		else {
-			$error = 2;
-		}
+if (isset($_POST['submit'])) {
+	if (registrasi($_POST) > 0) {
+		$error = 1;
+	} else {
+		$error = 2;
 	}
+}
 
 ?>
 
 <!doctype html>
 <html lang="en">
+
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -78,7 +68,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 	<script src="https://kit.fontawesome.com/9da43ad1c6.js" crossorigin="anonymous"></script>
-	
+
 	<title>Register</title>
 </head>
 
@@ -106,7 +96,7 @@
 						</ol>
 					</nav>
 				<?php } ?>
-				
+
 				<form method="post" action="" enctype="multipart/form-data">
 					<div class="mb-3">
 						<label for="nama" class="form-label">Nama</label>
@@ -145,7 +135,7 @@
 					<div class="mb-4">
 						<label for="password" class="form-label">Password</label>
 						<input type="password" name="password" class="form-control" id="passwordHelpBlock" placeholder="Masukkan Password" required>
-						<div id="passwordHelpBlock" class="form-text"> Your password must be 8-20 characters long, contain letters and numbers.</div>
+						<!-- <div id="passwordHelpBlock" class="form-text"> Your password must be 8-20 characters long, contain letters and numbers.</div> -->
 					</div>
 
 					<label for="kartupelajar" class="mb-2">Kartu Pelajar</label>
@@ -165,4 +155,5 @@
 		</div>
 	</div>
 </body>
+
 </html>
