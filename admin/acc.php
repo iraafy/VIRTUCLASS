@@ -4,7 +4,7 @@
     session_start();
     if( !isset($_SESSION["loginadmin"]))
     {
-        header("Location: ../login.php");
+        header("Location: ../../../login.php");
         exit;
     }
     else{
@@ -12,5 +12,3 @@
         mysqli_query($conn, $query);
         header('location: admin.php');
     }
-
-?>

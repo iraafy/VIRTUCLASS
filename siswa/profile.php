@@ -1,95 +1,82 @@
 <?php
 
-    include '../conn.php';
-    session_start();
-    if (!isset($_SESSION["login"])) {
-        header("Location: ../login.php");
-        exit;
+include '../conn.php';
+session_start();
+if (!isset($_SESSION["login"])) {
+    header("Location: ../login.php");
+    exit;
+}
+$error = 0;
+$siswa = mysqli_query($conn, 'SELECT * FROM siswa');
+$kelas = mysqli_query($conn, 'SELECT * FROM kelas');
+$record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
+
+function edit($data)
+{
+    global $conn;
+    $nama = $_POST["uname"];
+    $asal = $_POST["asal"];
+    $email = $_POST["email"];
+    $telepon = $_POST["telepon"];
+
+    //add to db
+    mysqli_query($conn, "UPDATE siswa SET nama_siswa='$nama', asal_sekolah='$asal', email='$email', telepon='$telepon' WHERE id_siswa = '$_SESSION[id]'");
+
+    return mysqli_affected_rows($conn);
+}
+
+if (isset($_POST["edit"])) {
+
+    if (edit($_POST) > 0) {
+        header("Location: profile.php");
+    } else {
+        echo mysqli_error($conn);
     }
-    $error = 0;
-    $siswa = mysqli_query($conn, 'SELECT * FROM siswa');
-    $kelas = mysqli_query($conn, 'SELECT * FROM kelas');
-    $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
+}
 
-    function edit($data)
-    {
-        global $conn;
-        $nama = $_POST["uname"];
-        $asal = $_POST["asal"];
-        $email = $_POST["email"];
-        $telepon = $_POST["telepon"];
-        
-        //add to db
-        mysqli_query($conn, "UPDATE siswa SET nama_siswa='$nama', asal_sekolah='$asal', email='$email', telepon='$telepon' WHERE id_siswa = '$_SESSION[id]'");
+function upload_nilai($data)
+{
+    global $conn;
+    $tgl = date('Y/m/d');
+    $nilai = $data["nilai"];
+    $kategori_nilai = $data["kategori_nilai"];
+    $id_siswa = $_SESSION["id"];
+    $id_course = $data["courseDataNilai"];
+    $filename = $_FILES['file1']['name'];
 
-        return mysqli_affected_rows($conn);
-
-    }
-
-    if( isset($_POST["edit"]) ) 
-    {
-
-        if( edit($_POST) > 0 ) 
-        {
-            header("Location: profile.php");
-        }
-        else
-        {
-            echo mysqli_error($conn);
-        }
-    }
-
-    function upload_nilai($data) 
-	{
-		global $conn;
-		$tgl = date('Y/m/d');
-		$nilai = $data["nilai"];
-		$kategori_nilai = $data["kategori_nilai"];
-		$id_siswa = $_SESSION["id"];
-		$id_course = $data["courseDataNilai"];
-        $filename = $_FILES['file1']['name'];
-
-        if($filename != '')
-        {
-            $ext = pathinfo($filename, PATHINFO_EXTENSION);
-            $allowed = ['pdf', 'png', 'jpg', 'jpeg'];
-            if (in_array($ext, $allowed))
-            {
-                $filename = md5(time()).'-'.$_SESSION['username'].'-'.$filename;
-                $path = '../admin/bukti/nilai/';
-                move_uploaded_file($_FILES['file1']['tmp_name'],($path . $filename));
-                $sql = "INSERT INTO record_siswa VALUES('', '$tgl', '$nilai', '$kategori_nilai', '$id_siswa', '$id_course', '$filename')";
-                mysqli_query($conn, $sql);
-                return mysqli_affected_rows($conn);
-            }
-            else
-            {
-                echo "<script>
+    if ($filename != '') {
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $allowed = ['pdf', 'png', 'jpg', 'jpeg'];
+        if (in_array($ext, $allowed)) {
+            $filename = md5(time()) . '-' . $_SESSION['username'] . '-' . $filename;
+            $path = '../admin/bukti/nilai/';
+            move_uploaded_file($_FILES['file1']['tmp_name'], ($path . $filename));
+            $sql = "INSERT INTO record_siswa VALUES('', '$tgl', '$nilai', '$kategori_nilai', '$id_siswa', '$id_course', '$filename')";
+            mysqli_query($conn, $sql);
+            return mysqli_affected_rows($conn);
+        } else {
+            echo "<script>
                     alert('File nilai tidak sesuai kriteria (gunakan pdf, png, jpg, atau jpeg).');
                 </script>";
-            }
         }
-        else {
-            echo "<script>
+    } else {
+        echo "<script>
                 alert('File nilai tidak sesuai kriteria!');
-            </script>";	
-        }
-	}
+            </script>";
+    }
+}
 
-	if (isset($_POST['upload_nilai'])) 
-	{ 
-		if( upload_nilai($_POST) > 0 ) 
-		{
-			echo "<script>
+if (isset($_POST['upload_nilai'])) {
+    if (upload_nilai($_POST) > 0) {
+        echo "<script>
                     alert('Upload Nilai Berhasil');
                 </script>";
-		}
-		else {
-			echo "<script>
+    } else {
+        echo "<script>
                     alert('Upload Nilai Gagal');
                 </script>";
-		}
-	}
+    }
+}
 
 ?>
 
@@ -214,10 +201,10 @@
                                                     <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                    <div class="modal-body" style="text-align: justify">
-                                                        <table class="table">
-                                                            <tr>
-                                                                <td>
+                                                <div class="modal-body" style="text-align: justify">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <td>
                                                                 Nama Siswa
                                                             </td>
                                                             <td>
@@ -291,10 +278,10 @@
                                 <form action="" method="post">
                                     <div class="input-group">
                                         <select name="coursePHB" class="form-select" id="coursePHB">
-                                            <?php 
-                                                $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
-                                                while ($row = mysqli_fetch_array($sql)) { ?>
-                                                <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
+                                            <?php
+                                            $sql = mysqli_query($conn, "SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
+                                            while ($row = mysqli_fetch_array($sql)) { ?>
+                                                <option value="<?= $row['id_course']; ?>"> <?= $row['nama_course']; ?> </option>;
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -306,10 +293,10 @@
                                 <label class="mt-3 mb-2" for="selectedCategoryFilter"><b>Mata Pelajaran</b></label>
                                 <div class="input-group">
                                     <select name="courseUTS" class="form-select" id="courseUTS">
-                                        <?php 
-                                            $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
-                                            while ($row = mysqli_fetch_array($sql)) { ?>
-                                            <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
+                                        <?php
+                                        $sql = mysqli_query($conn, "SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
+                                        while ($row = mysqli_fetch_array($sql)) { ?>
+                                            <option value="<?= $row['id_course']; ?>"> <?= $row['nama_course']; ?> </option>;
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -319,10 +306,10 @@
                                 <label class="mt-3 mb-2" for="selectedCategoryFilter"><b>Mata Pelajaran</b></label>
                                 <div class="input-group">
                                     <select name="courseUAS" class="form-select" id="courseUAS" onchange="findmyvalue()">
-                                        <?php 
-                                            $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
-                                            while ($row = mysqli_fetch_array($sql)) { ?>
-                                            <option value="<?= $row['id_course'];?>"> <?= $row['nama_course'];?> </option>;
+                                        <?php
+                                        $sql = mysqli_query($conn, "SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
+                                        while ($row = mysqli_fetch_array($sql)) { ?>
+                                            <option value="<?= $row['id_course']; ?>"> <?= $row['nama_course']; ?> </option>;
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -344,35 +331,35 @@
                             <?php } ?>
                         </div>
                     </div> -->
-                    <form action="" method="post" enctype="multipart/form-data">
-                        <label class="mt-3 mb-2" for="inputGroupSelect01"><b>Kategori Nilai</b></label>
-                        <div class="input-group">
-                            <select class="form-select" id="inputGroupSelect01" name="kategori_nilai" required>
-                                <option value="PHB">PHB</option>
-                                <option value="UTS">UTS</option>
-                                <option value="UAS">UAS</option>
-                            </select>
-                        </div>
-                        <label class="mt-3 mb-2" for="inputGroupSelect01"><b>Course</b></label>
-                        <div class="input-group">
-                            <select name="courseDataNilai" class="form-select" id="courseDataNilai" required>
-                                <?php 
-                                    $sql = mysqli_query($conn,"SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <label class="mt-3 mb-2" for="inputGroupSelect01"><b>Kategori Nilai</b></label>
+                            <div class="input-group">
+                                <select class="form-select" id="inputGroupSelect01" name="kategori_nilai" required>
+                                    <option value="PHB">PHB</option>
+                                    <option value="UTS">UTS</option>
+                                    <option value="UAS">UAS</option>
+                                </select>
+                            </div>
+                            <label class="mt-3 mb-2" for="inputGroupSelect01"><b>Course</b></label>
+                            <div class="input-group">
+                                <select name="courseDataNilai" class="form-select" id="courseDataNilai" required>
+                                    <?php
+                                    $sql = mysqli_query($conn, "SELECT id_course, nama_course FROM course WHERE id_kelas = $getKelasID");
                                     while ($row = mysqli_fetch_array($sql)) { ?>
-                                    <option value="<?= $row['id_course'];?>" > <?= $row['nama_course'];?> </option>;
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <label class="mt-3 mb-2"><b>Nilai</b></label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="nilai" placeholder="Masukan nilai" required>
-                        </div>
-                        <label class="mt-3 mb-2"><b>Bukti</b></label>
-                        <div class="input-group">
-                            <input type="file" name="file1" class="form-control" id="inputGroupFile02" required>
-                        </div>
-                        <button type="submit" name="upload_nilai" class="btn mt-4" style="float: right; background-color: #991311; color: white;">Upload</button>
-                    </form>
+                                        <option value="<?= $row['id_course']; ?>"> <?= $row['nama_course']; ?> </option>;
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <label class="mt-3 mb-2"><b>Nilai</b></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="nilai" placeholder="Masukan nilai" required>
+                            </div>
+                            <label class="mt-3 mb-2"><b>Bukti</b></label>
+                            <div class="input-group">
+                                <input type="file" name="file1" class="form-control" id="inputGroupFile02" required>
+                            </div>
+                            <button type="submit" name="upload_nilai" class="btn mt-4" style="float: right; background-color: #991311; color: white;">Upload</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -400,14 +387,14 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script>
-        <?php  
-            $nilai = array(); 
-            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='PHB' AND id_course = '<script>document.write(myval);</script>'");
-            $nilai = mysqli_fetch_all($nilai_sql);
+        <?php
+        $nilai = array();
+        $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='PHB' AND id_course = '<script>document.write(myval);</script>'");
+        $nilai = mysqli_fetch_all($nilai_sql);
 
-            $tanggal = array(); 
-            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='PHB' AND id_course = '<script>document.write(myval);</script>'");
-            $tanggal = mysqli_fetch_all($tanggal_sql);
+        $tanggal = array();
+        $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='PHB' AND id_course = '<script>document.write(myval);</script>'");
+        $tanggal = mysqli_fetch_all($tanggal_sql);
         ?>
 
         var data_tanggal = [ <?= json_encode($tanggal); ?> ];  
@@ -448,14 +435,14 @@
         });
     </script>
     <script>
-        <?php  
-            $nilai = array(); 
-            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UTS'");
-            $nilai = mysqli_fetch_all($nilai_sql);
+        <?php
+        $nilai = array();
+        $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UTS'");
+        $nilai = mysqli_fetch_all($nilai_sql);
 
-            $tanggal = array(); 
-            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UTS'");
-            $tanggal = mysqli_fetch_all($tanggal_sql);
+        $tanggal = array();
+        $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UTS'");
+        $tanggal = mysqli_fetch_all($tanggal_sql);
         ?>
 
         var data_tanggal = [ <?= json_encode($tanggal); ?> ];  
@@ -496,14 +483,14 @@
         });
     </script>
     <script>
-        <?php  
-            $nilai = array(); 
-            $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UAS'");
-            $nilai = mysqli_fetch_all($nilai_sql);
+        <?php
+        $nilai = array();
+        $nilai_sql = mysqli_query($conn, "SELECT nilai FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UAS'");
+        $nilai = mysqli_fetch_all($nilai_sql);
 
-            $tanggal = array(); 
-            $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UAS'");
-            $tanggal = mysqli_fetch_all($tanggal_sql);
+        $tanggal = array();
+        $tanggal_sql = mysqli_query($conn, "SELECT tanggal FROM record_siswa WHERE id_siswa = $_SESSION[id] AND kategori_nilai ='UAS'");
+        $tanggal = mysqli_fetch_all($tanggal_sql);
         ?>
 
         var data_tanggal = [ <?= json_encode($tanggal); ?> ];  

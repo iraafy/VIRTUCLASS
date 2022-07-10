@@ -2,7 +2,7 @@
 
 session_start();
 if (!isset($_SESSION["loginguru"])) {
-	header("Location: ../../login.php");
+	header("Location: ../../../../login.php");
 	exit;
 }
 include '../../conn.php';

@@ -1,10 +1,10 @@
 <?php
 
-// session_start();
-// if (!isset($_SESSION["loginguru"])) {
-// 	header("Location: ../../login.php");
-// 	exit;
-// }
+session_start();
+if (!isset($_SESSION["loginadmin"])) {
+	header("Location: ../../../login.php");
+	exit;
+}
 include '../conn.php';
 $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
 
@@ -30,7 +30,7 @@ $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" href="admin.php">
 				<img src="../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@ $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
 						<a class="nav-link" href="uploadMateri.php">Materi&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="Dashboard.php"><b>Dashboard Nilai</b>&emsp;</a>
+						<a class="nav-link" href="dashboard.php"><b>Dashboard Nilai</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="../logout.php"><span class="iconify-inline" data-icon="carbon:logout"></span></a>

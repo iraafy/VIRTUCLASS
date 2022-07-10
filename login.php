@@ -11,6 +11,10 @@ if (isset($_SESSION["loginadmin"])) {
 	header("Location: admin/admin.php");
 	exit;
 }
+if (isset($_SESSION["loginguru"])) {
+	header("Location: admin/guru/guru.php");
+	exit;
+}
 if (isset($_POST["submit"])) {
 	$email = $_POST["email"];
 	$pass = $_POST["password"];

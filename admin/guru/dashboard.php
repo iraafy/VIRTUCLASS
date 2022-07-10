@@ -1,5 +1,9 @@
 <?php
 include '../../conn.php';
+if (!isset($_SESSION["loginguru"])) {
+	header("Location: ../../../../login.php");
+	exit;
+}
 $record_siswa = mysqli_query($conn, 'SELECT * FROM record_siswa');
 ?>
 

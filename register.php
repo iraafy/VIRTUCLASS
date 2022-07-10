@@ -2,7 +2,14 @@
 
 require 'conn.php';
 session_start();
-
+if (isset($_SESSION["login"])) {
+	header("Location: index.php");
+	exit;
+}
+if (isset($_SESSION["loginadmin"])) {
+	header("Location: admin/admin.php");
+	exit;
+}
 $error = 0;
 function registrasi($data)
 {

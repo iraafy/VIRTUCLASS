@@ -1,37 +1,43 @@
 <?php
 
-	include '../conn.php';
-	include '../assets/php/function.php';
-	$notif = 0;
-	$error = 0;
-	$list_guru = mysqli_query($conn, 'select * from guru;');
+include '../conn.php';
+include '../assets/php/function.php';
+session_start();
+if (!isset($_SESSION["loginadmin"])) {
+	header("Location: ../../../login.php");
+	exit;
+}
+// if (!isset($_SESSION["loginadmin"])) {
+// 	header("Location: ../../../login.php");
+// 	exit;
+// }
+$notif = 0;
+$error = 0;
+$list_guru = mysqli_query($conn, 'select * from guru;');
 
-	function rand_string( $length ) {
+function rand_string($length)
+{
 
-		$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		return substr(str_shuffle($chars),0,$length);
-	
+	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	return substr(str_shuffle($chars), 0, $length);
+}
+
+if (isset($_POST["upload_guru"])) {
+	if (upload_guru($_POST) > 0) {
+		$notif = 2;
+		header("Refresh: 4; url=mgmt_guru.php");
+	} else {
+		$error = 1;
+		header("Refresh: 4; url=mgmt_guru.php");
 	}
-	
-	if(isset($_POST["upload_guru"]))
-	{
-		if( upload_guru($_POST) > 0 ) 
-		{
-			$notif = 2;
-			header("Refresh: 4; url=mgmt_guru.php");
-		}
-		else
-		{
-			$error = 1;
-			header("Refresh: 4; url=mgmt_guru.php");
-		}
-	}
+}
 
 ?>
 
 
 <!doctype html>
 <html lang="en">
+
 <head>
 
 	<!-- Required meta tags -->
@@ -44,19 +50,20 @@
 	<title>VirtuClass</title>
 
 </head>
+
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
-			<a class="navbar-brand" href="#">
-                <img src="../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
-            </a>
+			<a class="navbar-brand" href="admin.php">
+				<img src="../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
+			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
+					<li class="nav-item">
 						<a class="nav-link" href="admin.php">Siswa&emsp;</a>
 					</li>
 					<li class="nav-item">
@@ -77,7 +84,7 @@
 	</nav>
 
 	<br><br>
-    <div class="container mt-5 mb-5">
+	<div class="container mt-5 mb-5">
 		<h3 class="text-center mt-3 mb-5" style="color: #991311">
 			<b>
 				Manajemen Guru VirtuClass
@@ -118,7 +125,7 @@
 							<div class="input-group">
 								<input type="text" class="form-control" name="password" value="<?= rand_string(8); ?>" placeholder="Password" required>
 							</div>
-							<button type="submit" name="upload_guru" class="btn mt-4 mb-3" style="float: right; background-color: #991311; color: white;" >Upload</button>
+							<button type="submit" name="upload_guru" class="btn mt-4 mb-3" style="float: right; background-color: #991311; color: white;">Upload</button>
 						</form>
 					</div>
 				</div>
@@ -148,36 +155,37 @@
 				</thead>
 				<tbody style="text-align:center">
 					<?php $no = 1; ?>
-						<?php foreach ($list_guru as $list) { ?>
-							<tr>
-								<td>
-									<?=$no;?>
-								</td>
-								<td>
-									<?=$list['nama']?>
-								</td>
-								<td>
-									<?=$list['email']?>
-								</td>
-								<td>
-									<?=$list['password']?>
-								</td>
-								<td>
-									<a href="hapus_guru.php?id_guru=<?php echo $list['id_guru']; ?>" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
-								</td>
-							</tr>
+					<?php foreach ($list_guru as $list) { ?>
+						<tr>
+							<td>
+								<?= $no; ?>
+							</td>
+							<td>
+								<?= $list['nama'] ?>
+							</td>
+							<td>
+								<?= $list['email'] ?>
+							</td>
+							<td>
+								<?= $list['password'] ?>
+							</td>
+							<td>
+								<a href="hapus_guru.php?id_guru=<?php echo $list['id_guru']; ?>" class="btn btn-danger"><span class="iconify-inline" data-icon="fluent:delete-20-regular" style="color: white;"></span></a>
+							</td>
+						</tr>
 						<?php $no++ ?>
 					<?php } ?>
 				</tbody>
 			</table>
 		</div>
-    </div>
+	</div>
 
 	</script>
 	<!-- iconify -->
 	<script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
 	<!-- Option 1: Bootstrap Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-	
+
 </body>
+
 </html>

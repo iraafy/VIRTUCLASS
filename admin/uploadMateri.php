@@ -2,6 +2,11 @@
 
 include '../conn.php';
 include '../assets/php/function.php';
+session_start();
+if (!isset($_SESSION["loginadmin"])) {
+	header("Location: ../../../login.php");
+	exit;
+}
 $notif = 0;
 $error = 0;
 $kelas = mysqli_query($conn, 'SELECT * FROM kelas');
@@ -79,7 +84,7 @@ if (isset($_POST["update_modul"])) {
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.35);">
 		<div class="container ps-4 pe-4">
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" href="admin.php">
 				<img src="../assets/img/virtuclass_logo.svg" width="15%" alt="virtuclass-logo">
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +102,7 @@ if (isset($_POST["update_modul"])) {
 						<a class="nav-link" href="uploadMateri.php"><b>Materi</b>&emsp;</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="Dashboard.php">Dashboard Nilai&emsp;</a>
+						<a class="nav-link" href="dashboard.php">Dashboard Nilai&emsp;</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="../logout.php"><span class="iconify-inline" data-icon="carbon:logout"></span></a>

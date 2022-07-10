@@ -5,7 +5,7 @@
 require '../conn.php';
 session_start();
 if (!isset($_SESSION["loginadmin"])) {
-    header("Location: ../login.php");
+    header("Location: ../../../login.php");
     exit;
 } else {
     // $dt_kls = $_GET['nama_kls'];
