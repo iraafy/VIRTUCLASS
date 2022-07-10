@@ -43,16 +43,16 @@ $submodul = mysqli_query($conn, 'SELECT * FROM submodul');
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="../../index.php">Home&emsp;</a>
+						<a class="nav-link" href="../../index.php">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="kelas.php"><b>Course</b>&emsp;</a>
+						<a class="nav-link" href="kelas.php"><b>Course</b></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="../../index.php#about">About&emsp;</a>
+						<a class="nav-link" href="../../index.php#about">About</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="../../index.php#faq">FAQ&emsp;</a>
+						<a class="nav-link" href="../../index.php#faq">FAQ</a>
 					</li>
 					<li class="nav-item">
 						<div class="dropdown">

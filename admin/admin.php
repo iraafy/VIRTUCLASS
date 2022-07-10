@@ -7,6 +7,12 @@ if (!isset($_SESSION["loginadmin"])) {
 	exit;
 }
 $siswa = mysqli_query($conn, 'SELECT * FROM siswa');
+
+if (isset($_POST["reset-kelas"])) {
+	$kls_lama = $_POST['kls_lama'];
+	mysqli_query($conn, "UPDATE siswa SET kelas = 'null' WHERE kelas = '$kls_lama'");
+	header("Location: admin.php");
+}
 ?>
 
 <!doctype html>
@@ -67,6 +73,63 @@ $siswa = mysqli_query($conn, 'SELECT * FROM siswa');
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-4">
+				<a href="update_siswa.php" class="btn btn-danger mt-3" style="width: 100%;"><small>Update Data Siswa</small></a>
+			</div>
+			<div class="col-4">
+				<button type="submit" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal00" style="width: 100%;"><small>Update Data Kelas</small></button>
+				<div class="modal fade" id="exampleModal00" tabindex="-1" aria-labelledby="exampleModal00Label" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<form action="" method="post">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModal00Label"><b>Update Data Kelas Siswa</b></h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body pt-3 pb-3">
+									<label> <b>Nama Lama</b> </label>
+									<input type="text" name="kls_lama" class="form-control" placeholder="Masukan Nama Kelas Lama" required>
+									<br>
+									<!-- <label> <b>Nama Baru</b> </label>
+									<select class="form-select" aria-label="Default select example" nama='kls_baru' onchange="showDiv(this)" required>
+										<option value="null">null</option>
+										<option value="custom">custom</option>
+									</select>
+									<div id="form-custom" style="display:none;">
+										<div class="mb-3">
+											<input type="text" name="custom-value" class="form-control" placeholder="Masukan Nama Kelas Baru">
+										</div>
+									</div> -->
+								</div>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-danger" name="reset-kelas">Update</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-4">
+				<button type="submit" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal0" style="width: 100%;"><small>Reset Semua Data Kelas</small></button>
+				<div class="modal fade" id="exampleModal0" tabindex="-1" aria-labelledby="exampleModal0Label" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModal0Label"><b>Reset Kelas</b></h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body pb-5">
+								<p>Apakah anda yakin ingin me-reset semua data kelas setiap siswa menjadi "null"?</p>
+							</div>
+							<div class="modal-footer">
+								<a href="reset_kelas.php" class="btn btn-danger">Reset</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<input type="text" id="search" class="form-control mt-5" placeholder="Cari Pelajar">
 		<div style="overflow-x:auto;">
@@ -92,7 +155,7 @@ $siswa = mysqli_query($conn, 'SELECT * FROM siswa');
 								<a href="detail.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal-<?php echo $datasiswa['id_siswa']; ?>">Detail</a>
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal-<?php echo $datasiswa['id_siswa']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
+									<div class="modal-dialog modal-lg">
 										<div class="modal-content">
 											<div class="modal-header">
 												<h5 class="modal-title" id="exampleModalLabel">Detail Info</h5>
@@ -153,12 +216,7 @@ $siswa = mysqli_query($conn, 'SELECT * FROM siswa');
 												</table>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-												<?php if ($datasiswa['validated'] == "1") { ?>
-													<a href="acc.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn disabled" style="background-color: lightgrey; color: black;">Tervalidasi</a>
-												<?php } else { ?>
-													<a href="acc.php?id_siswa=<?php echo $datasiswa['id_siswa']; ?>" class="btn btn-danger">Validasi</a>
-												<?php } ?>
+												<button type="button" class="btn btn-secondary">Update</button>
 											</div>
 										</div>
 									</div>
@@ -198,6 +256,16 @@ $siswa = mysqli_query($conn, 'SELECT * FROM siswa');
 				});
 			});
 		});
+	</script>
+
+	<script type="text/javascript">
+		function showDiv(select) {
+			if (select.value == "null") {
+				document.getElementById('form-custom').style.display = "none";
+			} else {
+				document.getElementById('form-custom').style.display = "block";
+			}
+		}
 	</script>
 </body>
 

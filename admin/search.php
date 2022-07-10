@@ -1,8 +1,4 @@
 <?php
-if (!isset($_SESSION["loginadmin"])) {
-	header("Location: ../../../login.php");
-	exit;
-}
 if (isset($_POST['search'])) {
 	require_once '../conn.php';
 	$search = $_POST['search'];
